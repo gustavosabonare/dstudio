@@ -1,0 +1,92 @@
+.events {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  margin: 150px auto;
+  position: relative;
+  width: 85%;
+
+  &__filter {
+    background: url('../../assets/backgrounds/bottom-shadow.png');
+    background-size: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  &__title {
+    color: #fff;
+    font-size: 40px;
+    margin: 40px 0;
+  }
+
+  &__container {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  &__content {
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    min-width: 300px;
+    overflow: hidden;
+    position: relative;
+    width: 30%;
+  }
+
+  &__content-overlay {
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  &__content-image {
+    transition: all .5s linear;
+  }
+
+  &__content:hover &__content-image {
+    transform: scale(1.2);
+  }
+
+  &__content:hover &__content-info,
+  &__content:hover &__content-title {
+    opacity: 1;
+  }
+
+  &__content:hover &__content-overlay {
+    box-shadow: inset 0 -300px 200px -82px #3b1255;
+    opacity: 1;
+  }
+
+  &__content-info {
+    bottom: 0;
+    font-size: 14px;
+    margin: 20px;
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  &__content-title {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+  }
+}

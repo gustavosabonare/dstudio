@@ -1,0 +1,77 @@
+.player {
+  align-items: center;
+  color: white;
+  display: flex;
+  height: 10vh;
+  margin: auto;
+  position: relative;
+  width: 80%;
+
+  & i {
+    cursor: pointer;
+  }
+
+  &__buttons {
+    align-items: center;
+    color: white;
+    display: flex;
+    font-size: 25px;
+    height: 100%;
+    justify-content: space-around;
+    width: 150px;
+  }
+
+  &__image {
+    font-size: 50px;
+    margin-left: 20px;
+  }
+
+  &__progress {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: center;
+    margin: 0 10px;
+    width: 90%;
+
+    progress {
+      height: 5px;
+      width: 100%;
+
+      &[value] {
+        appearance: none;
+      }
+
+      &[value]::-webkit-progress-bar {
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .25) inset;
+      }
+
+      &[value]::-webkit-progress-value {
+        background-color: rgba(165, 64, 143, .5);
+      }
+    }
+  }
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__volume {
+    align-items: center;
+    display: flex;
+    font-size: 25px;
+    height: 100%;
+    justify-content: center;
+    width: 50px;
+  }
+
+  &__list {
+    align-items: center;
+    display: flex;
+    font-size: 25px;
+    height: 100%;
+    justify-content: center;
+    width: 50px;
+  }
+}
