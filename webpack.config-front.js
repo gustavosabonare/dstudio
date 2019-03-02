@@ -4,11 +4,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/client/index.js'],
+  entry: [
+    'webpack-hot-middleware/client',
+    './src/client/index.js'
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
 
   devServer: {
     contentBase: './dist',

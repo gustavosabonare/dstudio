@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import React from 'react';
-import { matchPath, StaticRouter } from 'react-router-dom';
+import { matchPath, StaticRouter } from 'react-router';
 
 import routes from './routes';
 import pageTemplate from './pageTemplate';

@@ -7,7 +7,7 @@
     "build:server": "webpack --config ./webpack.config-server.js/",
     "build:client": "webpack --config ./webpack.config-front.js/",
     "build": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "start": "webpack-dev-server --config ./webpack.config-server.js/"
+    "start": "npm run build && node ./dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0",
+    "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.7.2"
   }
 }
