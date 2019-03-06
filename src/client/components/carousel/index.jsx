@@ -14,7 +14,7 @@ export default (props) => (
     <h2 className="events__title">{props.title}</h2>
     <div className="events__filter"></div>
     <div className="events__container">
-      <article className="events__content">
+      <article className="events__content" onClick={() => props.onClick(1)}>
         <img className="events__content-image" src={Convida1} />
         <span className="events__content-overlay"></span>
         <h4 className="events__content-title">Marcos Pagu</h4>

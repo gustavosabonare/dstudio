@@ -1,13 +1,13 @@
-// import About from './About';
-// import Convida from './Convida';
-import Home from './Home.jsx';
-// import Services from './Services';
-// import Videos from './Videos';
+import About from './about';
+import Convida from './convida';
+import Home from './home';
+import Services from './services';
+import Videos from './videos';
 
 export {
-    // About,
-    // Convida,
+    About,
+    Convida,
     Home,
-    // Services,
-    // Videos
+    Services,
+    Videos
 }

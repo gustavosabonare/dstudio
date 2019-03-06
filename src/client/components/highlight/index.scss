@@ -6,6 +6,14 @@
   position: relative;
   width: 100%;
 
+  &--banner {
+    height: 35vh;
+
+    .highlight__info {
+      bottom: -50px;
+    }
+  }
+
   &__image,
   &__filter {
     filter: grayscale(100%);
@@ -39,31 +47,43 @@
     flex-direction: column;
     justify-content: center;
     left: 0;
-    margin: 0 10%;
     position: absolute;
     text-align: center;
+    width: 100%;
     z-index: 2;
   }
 
   &__title {
     font-size: 70px;
     margin-bottom: 60px;
+    font-weight: 400;
   }
 
   &__description {
     font-size: 40px;
     margin-bottom: 50px;
+    margin: 0 10% 50px;
+    font-weight: 400;
   }
 
   &__button {
-    background: rgba(165, 64, 143, .2);
-    border: 0;
+    background: transparent;
+    border: 3px solid white;
     color: white;
     cursor: pointer;
     font-family: inherit;
-    font-size: 30px;
+    font-size: 25px;
+    font-weight: 600;
     outline: none;
-    padding: 5px 50px;
+    width: 190px;
+    height: 50px;
+
+    a {
+      margin-top: -2px;
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
   }
 }
 
