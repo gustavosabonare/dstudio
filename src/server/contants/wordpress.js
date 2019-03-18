@@ -1,0 +1,1 @@
+export const baseURL = 'https://www.diademastudio.com.br/wp-json/wp/v2/';
