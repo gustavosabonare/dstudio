@@ -1,11 +1,7 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "modules": false
-      }
-    ],
-    "react"
-  ]
+    "env"
+  ],
+  "sourceMaps": "inline",
+  "retainLines": true
 }

@@ -6,8 +6,11 @@
   "scripts": {
     "build:server": "webpack --config ./webpack.config-server.js/",
     "build:client": "webpack --config ./webpack.config-front.js/",
-    "build": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "start": "npm run build && node ./dist/server.js"
+    "build:clean": "rm -rf ./dist && npm run build:client && npm run build:server",
+    "build": "npm run build:client && npm run build:server",
+    "nodemon": "nodemon --no-lazy --inspect-brk=9229 ./dist/server.js --watch ./dist",
+    "debug": "npm-run-all -p build nodemon",
+    "start": "npm run build && nodemon ./dist/server.js --watch ./dist"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/gustavosabonare/Dstudio#readme",
   "dependencies": {
+    "axios": "0.18.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-router-dom": "^4.3.1"
