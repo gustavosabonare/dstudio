@@ -6,11 +6,9 @@
   "scripts": {
     "build:server": "webpack --config ./webpack.config-server.js/",
     "build:client": "webpack --config ./webpack.config-front.js/",
-    "build:clean": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "build": "npm run build:client && npm run build:server",
-    "nodemon": "nodemon --no-lazy --inspect-brk=9229 ./dist/server.js --watch ./dist",
-    "debug": "npm-run-all -p build nodemon",
-    "start": "npm run build && nodemon ./dist/server.js --watch ./dist"
+    "build": "rm -rf ./dist && npm run build:client && npm run build:server",
+    "nodemon": "nodemon --no-lazy --inspect ./dist/server.js",
+    "start": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -35,6 +33,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "css-loader": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
@@ -45,7 +44,7 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
+    "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.0",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.7.2"

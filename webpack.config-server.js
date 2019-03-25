@@ -24,7 +24,7 @@ module.exports = {
       resolve: { extensions: ['.js', '.jsx'] },
       exclude: [/node_modules/, /dist/],
       query: {
-        presets: ['env', 'react']
+        presets: ['env', 'stage-0', 'react']
       }
     },
     {

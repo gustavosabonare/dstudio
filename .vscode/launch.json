@@ -15,7 +15,7 @@
             "restart": true,
             "runtimeArgs": [
                 "run-script",
-                "debug"
+                "nodemon"
             ],
             "outFiles": [
                 "${workspaceFolder}/dist/server.js"

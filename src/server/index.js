@@ -4,9 +4,11 @@ import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import router from './router';
 import webpackConfig from '../../webpack.config-front';
 
+// Routers
+import frontRouter from './routers/frontRouter';
+import apiRouter from './routers/apiRouter';
 
 const app = express();
 const port = 3000;
@@ -20,7 +22,8 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(path.join(__dirname, "../dist")));
 
-app.get("/*", router);
+app.use("/api/", apiRouter(express.Router()));
+app.get("/*", frontRouter);
 
 app.listen(port);
 
