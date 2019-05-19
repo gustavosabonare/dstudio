@@ -22,7 +22,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(path.join(__dirname, "../dist")));
 
-app.use("/api/", apiRouter(express.Router()));
+app.use("/api", apiRouter(express.Router()));
 app.get("/*", frontRouter);
 
 app.listen(port);

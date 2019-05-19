@@ -18,8 +18,6 @@ export default (props) => {
     <div>
       <Highlight {...fakeConvida} />
 
-      <Player />
-
       <main>
         <Carousel title='D Studio Convida' onClick={(id) => props.history.push(`convida/${id}`)} />
       </main>

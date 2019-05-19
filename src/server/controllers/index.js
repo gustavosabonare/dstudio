@@ -7,7 +7,7 @@ import { buildConvidaPost, buildServicePost, buildSongPost, postBuilder } from '
 async function pagesController(req, res) {
 
   try {
-    const pagesPosts = await getConvidas();
+    const pagesPosts = await getPages();
     const newPagePosts = pagesPosts.map(postBuilder);
 
     return res.status(200).send(newPagePosts);

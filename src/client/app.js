@@ -1,7 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-//Components
+// Components
+import Menu from './components/menu';
+import Player from './components/player';
+
+// Scenes
 import {
   About,
   Convida,
@@ -9,10 +13,10 @@ import {
   Services,
   Videos
 } from './scenes';
-import Menu from './components/menu';
 
 export default (props) => ([
   <Menu />,
+  <Player />,
   <Switch>
     <Route path='/' component={Home} exact />
     <Route path='/about' component={About} exact />

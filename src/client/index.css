@@ -3,6 +3,11 @@ body {
   margin: 0;
   background: #2e1537;
   font-family: 'Dosis', sans-serif;
+  height: 100vh;
+}
+
+* {
+  outline: none;
 }
 
 p {

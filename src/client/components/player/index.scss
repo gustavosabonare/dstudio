@@ -1,77 +1,146 @@
 .player {
-  align-items: center;
   color: white;
-  display: flex;
-  height: 10vh;
-  margin: auto;
-  position: relative;
-  width: 80%;
-
-  & i {
-    cursor: pointer;
+  right: 5vw;
+  position: fixed;
+  z-index: 999;
+  bottom: 10vh;
+  
+  &__icon {
+    font-size: 30px;
+    cursor: pointer; 
+    display: block;
+    z-index: 999;
+    animation: pulsate-fwd 0.5s ease-in-out infinite both;
   }
 
-  &__buttons {
-    align-items: center;
-    color: white;
+  &__modal {
+    position: absolute;
+    background: #3b2144;;
+    box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.75);
+    bottom: 70px;
+    z-index: 2;
+    right: 0;
     display: flex;
-    font-size: 25px;
-    height: 100%;
-    justify-content: space-around;
-    width: 150px;
+    flex-direction: column;
+    align-items: center;
+    animation: swing-in-bottom-fwd 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+    border-radius: 5px;
   }
 
-  &__image {
-    font-size: 50px;
-    margin-left: 20px;
+  &__banner {
+    width: 200px;
+    height: 150px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__progress {
+    margin: 10px 0;
     display: flex;
-    flex-direction: column;
-    height: 80%;
-    justify-content: center;
-    margin: 0 10px;
-    width: 90%;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
 
     progress {
+      -webkit-appearance: none;
       height: 5px;
-      width: 100%;
 
-      &[value] {
-        appearance: none;
-      }
-
-      &[value]::-webkit-progress-bar {
+      &::-webkit-progress-value {
+        background-color: #eee;
         border-radius: 2px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, .25) inset;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
       }
+    }
 
-      &[value]::-webkit-progress-value {
-        background-color: rgba(165, 64, 143, .5);
-      }
+    &-time {
+      margin: 0px 10px;
     }
   }
 
   &__title {
-    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
   }
 
-  &__volume {
-    align-items: center;
+  &__controls {
     display: flex;
-    font-size: 25px;
-    height: 100%;
-    justify-content: center;
-    width: 50px;
+    justify-content: space-around;
+    margin: 10px 0 15px 0;
+    width: 100%;
+
+    i {
+      cursor: pointer;
+    }
   }
 
-  &__list {
-    align-items: center;
-    display: flex;
-    font-size: 25px;
-    height: 100%;
-    justify-content: center;
-    width: 50px;
+  &__playlist {
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    font-size: 12px;
+    margin: 0 0px;
+    padding: 0;
+    height: 0;
+    list-style: none;
+    transition: height .7s ease-in-out;
+    overflow-y: scroll;
+
+    &--open {
+      height: 145px;
+    }
+
+    li {
+      margin: 15px 0 15px 15px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    p {
+      margin-left: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      background: rgba(0,0,0,0.2);
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb { 
+      background: #3b2144;
+    }
+  }
+}
+
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes swing-in-bottom-fwd {
+  0% {
+    -webkit-transform: rotateX(100deg);
+            transform: rotateX(100deg);
+    -webkit-transform-origin: bottom;
+            transform-origin: bottom;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0);
+            transform: rotateX(0);
+    -webkit-transform-origin: bottom;
+            transform-origin: bottom;
+    opacity: 1;
   }
 }
