@@ -1,20 +1,22 @@
-.header {
-  align-items: center;
-  border: 0;
-  display: flex;
-  height: 170px;
-  left: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 3;
-  transition: all .2s linear;
+@import '../../utils/mixins';
 
-  &__logo {
+.menu {
+  display: flex;
+  align-items: center;
+
+  i {
+    color: white;
     cursor: pointer;
-    height: 90px;
-    margin-left: 10.4vw;
-    width: 250px;
-    transition: all .2s linear;
+    font-size: 30px;
+    padding: 10px;
+
+    @include for-tablet-landscape-up {
+      font-size: 15px;
+    }
+  }
+
+  &__bars {
+    margin-right: 50px;
   }
 
   &__nav {
@@ -28,7 +30,6 @@
     margin: 0 2.2vw 0 auto;
     padding: 0;
     width: 350px;
-    transition: all .2s linear;
 
     & li {
       align-items: center;
@@ -52,38 +53,91 @@
     justify-content: space-between;
     margin-right: 100px;
     width: 130px;
-    transition: all .2s linear;
-
-    & > a {
-      color: white;
-      cursor: pointer;
-      font-size: 30px;
-      transition: all .2s linear;
-    }
   }
 
-  &--small {
-    background-color: rgb(112, 67, 140);
-    height: 50px;
-    padding: 10px 0;
+  &--responsive {
+    position: relative;
 
-    .header__logo {
-      height: 45px;
-      width: 125px;
+    .menu__content {
+      display: flex;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 0;
+      background: #2e1537;
+      flex-direction: column;
+      transition: width .3s ease;
+      border-left: 1px solid rgba(0, 0, 0, 0.2);
+      will-change: width;
+
+      &--open {
+        width: 50%;
+      }
     }
 
-    .header__nav {
-      font-size: 18px;
-      width: 240px;
+    .menu__logo {
+      height: 50px;
+      margin: 10px auto;
+
+      @include for-phone-only {
+        height: 35px;
+      }
     }
 
-    .header__social {
-      width: 90px;
-      & > a {
-        font-size: 20px;
+    .menu__social {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px auto;
+      width: 60%;
+
+      @include for-tablet-landscape-up {
+        margin: 15px auto;
+        width: 40%;
+      }
+
+      @include for-phone-only {
+        margin: 10px auto;
+      }
+    }
+
+    nav {
+      margin: 0;
+      align-items: baseline;
+      font-size: 20px;
+      flex-direction: column;
+      width: unset;
+
+      @include for-tablet-landscape-up {
+        font-size: 15px;
+      }
+
+      @include for-phone-only {
+        font-size: 12px;
+      }
+
+      & > li {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        align-items: baseline;
+
+        a {
+          text-decoration: none;
+          width: 100%;
+          padding: 20px;
+
+          @include for-tablet-landscape-up {
+            padding: 15px;
+          }
+
+          @include for-phone-only {
+            padding: 10px;
+          }
+        }
       }
     }
   }
 }
-
-

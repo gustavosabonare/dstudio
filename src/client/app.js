@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // Components
-import Menu from './components/menu';
+import Header from './components/header';
 import Player from './components/player';
 
 // Scenes
@@ -15,7 +15,7 @@ import {
 } from './scenes';
 
 export default (props) => ([
-  <Menu />,
+  <Header />,
   <Player />,
   <Switch>
     <Route path='/' component={Home} exact />

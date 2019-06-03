@@ -12,10 +12,26 @@ import './index.scss';
 
 export default (props) => {
   var settings = {
-    infinite: false,
+    infinite: true,
     arrows: true,
     slidesToShow: 6,
-    slidesToScroll: 5
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      }
+    ]
   };
 
   return (
@@ -27,74 +43,106 @@ export default (props) => {
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida1} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida2} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida3} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
-            impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
+              impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida4} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida1} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida2} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida3} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
           <article className="events__content" onClick={() => props.onClick(1)}>
             <img className="events__content-image" src={Convida4} />
             <span className="events__content-overlay"></span>
-            <h4 className="events__content-title">Marcos Pagu</h4>
-            <p className="events__content-info">Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
-              talento
-              incrível, é praticamente
+
+            <div className="events__content-info">
+              <h4 className="events__content-title">Marcos Pagu</h4>
+              <p className="events__content-description">
+                Marcos Pagu marca presença no bate papo do D Studio, um figura rara de um
+                talento
+                incrível, é praticamente
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
+            </div>
           </article>
         </Slider>
       </div>

@@ -1,50 +1,78 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
+// Styles
 import './index.scss';
 
-const smallHeaderClass = 'header--small';
-
-export default class Header extends Component {
-  state = { headerClass: '' };
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.getWindowHeight.bind(this));
+export default class Menu extends Component {
+  state = {
+    isOpen: false,
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.getWindowHeight.bind(this));
+  onBarsClick() {
+    const newIsOpen = !this.state.isOpen
+    const rootEl = document.getElementById('root');
+
+    if (newIsOpen)
+      rootEl.style.right = '50%';
+    else
+      rootEl.style.right = '0';
+
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
-  getWindowHeight() {
-    if (document.documentElement.scrollTop > 50 && this.state.headerClass !== smallHeaderClass)
-      this.setState({ headerClass: smallHeaderClass });
-    else if (document.documentElement.scrollTop === 0 && this.state.headerClass === smallHeaderClass)
-      this.setState({ headerClass: '' });
+  renderNav(linkCb = () => null) {
+    return (
+      <nav className="menu__nav">
+        <li onClick={linkCb}><Link to='/'>INÍCIO</Link></li>
+        <li onClick={linkCb}><Link to='/about'>SOBRE</Link></li>
+        <li onClick={linkCb}><Link to='/services'>SERVIÇOS</Link></li>
+        <li onClick={linkCb}><Link to='/videos'>VIDEOS</Link></li>
+      </nav>
+    )
+  }
+
+  renderSocial() {
+    return (
+      <div className="menu__social">
+        <a href='https://www.instagram.com/dstudiomusic/' target="_blank">
+          <i className="fab fa-instagram" />
+        </a>
+        <a href='https://www.facebook.com/dstudiooficial/' target="_blank">
+          <i className="fab fa-facebook-f facebook" />
+        </a>
+        <a href='https://www.youtube.com/channel/UCQBPThbxTlgow5c-Mqdinmg' target="_blank">
+          <i className="fab fa-youtube-square" />
+        </a>
+      </div>
+    )
   }
 
   render() {
+    const menuContentClass = this.state.isOpen ? 'menu__content menu__content--open' : 'menu__content';
+
     return (
-      <header className={`header ${this.state.headerClass}`}>
-        <img className="header__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
-        <nav className="header__nav">
-          <li><Link to='/'>INÍCIO</Link></li>
-          <li><Link to='/about'>SOBRE</Link></li>
-          <li><Link to='/services'>SERVIÇOS</Link></li>
-          <li><Link to='/videos'>VIDEOS</Link></li>
-        </nav>
-        <div className="header__social">
-          <a href='https://www.instagram.com/dstudiomusic/' target="_blank">
-            <i className="fab fa-instagram" />
-          </a>
-          <a href='https://www.facebook.com/dstudiooficial/' target="_blank">
-            <i className="fab fa-facebook-f facebook" />
-          </a>
-          <a href='https://www.youtube.com/channel/UCQBPThbxTlgow5c-Mqdinmg' target="_blank">
-            <i className="fab fa-youtube-square" />
-          </a>
-        </div>
-      </header>
-    )
+      <div>
+        <MediaQuery maxDeviceWidth={900}>
+          <div className="menu menu--responsive">
+            <div className="menu__bars" onClick={this.onBarsClick.bind(this)}>
+              <i className="fas fa-bars"></i>
+            </div>
+            <div className={menuContentClass}>
+              <img className="menu__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
+              {this.renderNav(this.onBarsClick.bind(this))}
+              {this.renderSocial()}
+            </div>
+          </div>
+        </MediaQuery>
+        <MediaQuery minDeviceWidth={901}>
+          <div className="menu">
+            {this.renderNav()}
+            {this.renderSocial()}
+          </div>
+        </MediaQuery>
+      </div>
+    );
   }
 }

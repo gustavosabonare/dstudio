@@ -1,6 +1,7 @@
+@import '../../utils/mixins';
+
 .events {
-  height: 500px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   position: relative;
   width: 85%;
 
@@ -8,10 +9,10 @@
     background: url('../../assets/backgrounds/events-shadow.png');
     background-size: 100%;
     height: 100%;
-    left: 0;
+    left: -1px;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: calc(100% + 5px);
     z-index: 2;
     pointer-events: none;
   }
@@ -21,6 +22,16 @@
     font-size: 50px;
     font-weight: 400;
     margin: 0 0 40px;
+
+    @include for-tablet-landscape-up {
+      font-size: 25px;
+      margin: 0 0 20px;
+    }
+
+    @include for-phone-only {
+      font-size: 15px;
+      margin: 0 0 12px;
+    }
   }
 
   &__container {
@@ -37,6 +48,14 @@
     overflow: hidden;
     position: relative;
     height: 380px;
+
+    @include for-tablet-landscape-up {
+      height: 250px;
+    }
+
+    @include for-phone-only { 
+      height: 160px;
+    }
   }
 
   &__content-overlay {
@@ -48,10 +67,18 @@
     position: absolute;
     width: 100%;
     z-index: 2;
+
+    @include for-tablet-landscape-up {
+      opacity: 1;
+      box-shadow: inset 0 -300px  200px -82px #3b1255a6;
+    }
   }
 
   &__content-image {
     transition: all .5s linear;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__content:hover &__content-image {
@@ -59,27 +86,39 @@
   }
 
   &__content:hover &__content-info,
-  &__content:hover &__content-title {
+  &__content:hover &__content-title,
+  &__content:hover &__content-description {
     opacity: 1;
   }
 
   &__content:hover &__content-overlay {
-    box-shadow: inset 0 -300px 200px -82px #3b1255;
+    box-shadow: inset 0 -300px  200px -82px #3b1255;
     opacity: 1;
   }
 
   &__content-info {
     bottom: 0;
     font-size: 14px;
-    margin: 20px;
+    padding: 20px;
     opacity: 0;
+    width: 100%;
     position: absolute;
     z-index: 2;
+    box-sizing: border-box;
+
+    @include for-tablet-landscape-up {
+      opacity: 1;
+    }
+  }
+
+  &__content-description {
+    @include for-tablet-landscape-up {
+      display: none;
+    }
   }
 
   &__content-title {
-    opacity: 0;
-    position: absolute;
     z-index: 2;
+    text-align: center;
   }
 }
