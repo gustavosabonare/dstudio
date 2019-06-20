@@ -2,7 +2,6 @@ import React from 'react';
 
 //COMPONENTS
 import Highlight from '../../components/highlight';
-import Player from '../../components/player';
 import Carousel from '../../components/carousel';
 
 export default (props) => {

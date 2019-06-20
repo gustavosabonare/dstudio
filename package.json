@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:server": "webpack --config ./webpack.config-server.js/",
-    "build:client": "webpack --config ./webpack.config-front.js/",
+    "build:server": "webpack --build-type server",
+    "build:client": "webpack --build-type front",
     "build": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "nodemon": "nodemon --no-lazy --inspect ./dist/server.js",
-    "start": "npm run build"
+    "nodemon": "sleep 9 && node --inspect-brk ./dist/server.js",
+    "start": "run-p -l build nodemon"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/gustavosabonare/Dstudio#readme",
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "^0.19.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-responsive": "^6.1.2",
@@ -37,10 +37,12 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "concurrently": "^4.1.0",
     "css-loader": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
     "isomorphic-style-loader": "^5.0.1",
     "node-sass": "^4.11.0",
+    "npm-run-all": "^4.1.5",
     "resolve-url-loader": "^3.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -49,6 +51,7 @@
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.0",
     "webpack-hot-middleware": "^2.24.3",
+    "webpack-merge": "^4.2.1",
     "webpack-node-externals": "^1.7.2"
   }
 }

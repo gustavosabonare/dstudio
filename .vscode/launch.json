@@ -12,10 +12,11 @@
             "stopOnEntry": false,
             "cwd": "${workspaceFolder}",
             "sourceMaps": true,
+            "runtimeVersion": "10.16.0",
             "restart": true,
             "runtimeArgs": [
                 "run-script",
-                "nodemon"
+                "start",
             ],
             "outFiles": [
                 "${workspaceFolder}/dist/server.js"

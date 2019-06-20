@@ -4,7 +4,7 @@ import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import webpackConfig from '../../webpack.config-front';
+import webpackConfig from '../../webpack.config';
 
 // Routers
 import frontRouter from './routers/frontRouter';
@@ -12,10 +12,11 @@ import apiRouter from './routers/apiRouter';
 
 const app = express();
 const port = 3000;
-const compiler = webpack(webpackConfig);
+const frontWebpackConfig = webpackConfig(null, { buildType: 'front' });
+const compiler = webpack(frontWebpackConfig);
 
 app.use(webpackDevMiddleware(compiler, {
-    noInfo: false, publicPath: webpackConfig.output.publicPath
+    noInfo: false, publicPath: frontWebpackConfig.output.publicPath
 }));
 
 app.use(webpackHotMiddleware(compiler));
