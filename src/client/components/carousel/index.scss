@@ -23,7 +23,7 @@
     font-weight: 400;
     margin: 0 0 40px;
 
-    @include for-tablet-landscape-up {
+    @include for-tablet-landscape {
       font-size: 25px;
       margin: 0 0 20px;
     }
@@ -49,7 +49,7 @@
     position: relative;
     height: 380px;
 
-    @include for-tablet-landscape-up {
+    @include for-tablet-landscape {
       height: 250px;
     }
 
@@ -68,7 +68,7 @@
     width: 100%;
     z-index: 2;
 
-    @include for-tablet-landscape-up {
+    @include for-tablet-landscape {
       opacity: 1;
       box-shadow: inset 0 -300px  200px -82px #3b1255a6;
     }
@@ -106,13 +106,13 @@
     z-index: 2;
     box-sizing: border-box;
 
-    @include for-tablet-landscape-up {
+    @include for-tablet-landscape {
       opacity: 1;
     }
   }
 
   &__content-description {
-    @include for-tablet-landscape-up {
+    @include for-tablet-landscape {
       display: none;
     }
   }

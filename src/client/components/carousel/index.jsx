@@ -53,7 +53,7 @@ export default (props) => {
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
             </div>
           </article>
-          <article className="events__content" onClick={() => props.onClick(1)}>
+          <article className="events__content" onClick={() => props.onClick(2)}>
             <img className="events__content-image" src={Convida2} />
             <span className="events__content-overlay"></span>
 
@@ -66,7 +66,7 @@ export default (props) => {
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
             </div>
           </article>
-          <article className="events__content" onClick={() => props.onClick(1)}>
+          <article className="events__content" onClick={() => props.onClick(3)}>
             <img className="events__content-image" src={Convida3} />
             <span className="events__content-overlay"></span>
 
@@ -105,7 +105,7 @@ export default (props) => {
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
             </div>
           </article>
-          <article className="events__content" onClick={() => props.onClick(1)}>
+          <article className="events__content" onClick={() => props.onClick(2)}>
             <img className="events__content-image" src={Convida2} />
             <span className="events__content-overlay"></span>
 
@@ -118,7 +118,7 @@ export default (props) => {
             impossível não se apaixonar por sua pessoa e por sua arte. Obrigado Pagu, você já é do mundo!</p>
             </div>
           </article>
-          <article className="events__content" onClick={() => props.onClick(1)}>
+          <article className="events__content" onClick={() => props.onClick(3)}>
             <img className="events__content-image" src={Convida3} />
             <span className="events__content-overlay"></span>
 

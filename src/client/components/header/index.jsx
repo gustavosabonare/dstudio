@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // Components
 import Menu from '../menu';
@@ -28,7 +29,9 @@ export default class Header extends Component {
   render() {
     return (
       <header className={`header ${this.state.headerClass}`}>
-        <img className="header__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
+        <Link to='/'>
+          <img className="header__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
+        </Link>
         <Menu />
       </header>
     )

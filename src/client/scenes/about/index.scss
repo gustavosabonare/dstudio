@@ -1,12 +1,89 @@
+@import '../../utils/mixins';
+
 .about {
   color: white;
   
   &__article-container {
+    color: white;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin: 5% 15%;
 
-    box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
+    & article {
+      box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.75);
+      margin-bottom: 30px;
+      margin-right: 2%;
+      width: 23.5%;
+      cursor: pointer;
+      transition: all .1s linear;
+
+      .card__info {
+        height: unset;
+        flex-grow: 1;
+      }
+
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    @include for-big-notebook-up {
+      & article {
+        margin-right: 2%;
+        width: 32%;
+      }
+    }
+
+    @include for-tablet-landscape {
+      margin: 5%;
+
+      & article {
+        margin-right: 5%;
+        &:nth-child(4n) {
+          margin-right: 5%;
+        }
+
+        &:nth-child(3n) {
+          margin-right: 5%;
+        }
+        &:nth-child(2n) {
+          margin-right: 0%;
+        }
+
+        .card__image {
+          height: 140px;
+        }
+
+        width: 47%;
+      }
+    }
+
+    @include for-phone-only {
+      margin: 10% 5%;
+
+      & article { 
+        .card__image {
+          height: 80px;
+        }
+
+        .card__info {
+          padding: 10px;
+
+          h2 {
+            font-size: 11px;
+          }
+          p {
+            margin-top: 5px;
+            font-size: 10px;
+          }
+        }
+
+        width: 47%;
+      }
+    }  
   }
 }

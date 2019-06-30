@@ -12,14 +12,14 @@ export default (html) => {
         <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
         <title>Document</title>
-        </head>
+    </head>
         
-        <body>
+    <body>
         <div id="root">
             ${html}
         </div>
 
-        <script type="text/javascript" src="/bundle.js"></script></body>
+        <script type="text/javascript" src="/bundle.js"></script>
     </body>
     </html>`
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 
-//COMPONENTS
+// COMPONENTS
 import Highlight from '../../components/highlight';
 import Carousel from '../../components/carousel';
 
-export default (props) => {
+export default ({ history }) => {
   const fakeConvida = {
     id: 1,
     title: 'Coletivo Central - D Studio Convida',
@@ -18,7 +18,7 @@ export default (props) => {
       <Highlight {...fakeConvida} />
 
       <main>
-        <Carousel title='D Studio Convida' onClick={(id) => props.history.push(`convida/${id}`)} />
+        <Carousel title='D Studio Convida' onClick={(id) => history.push(`convida/${id}`)} />
       </main>
     </div >
   )

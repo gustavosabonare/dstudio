@@ -14,6 +14,7 @@
             "sourceMaps": true,
             "runtimeVersion": "10.16.0",
             "restart": true,
+            "timeout": 20000,
             "runtimeArgs": [
                 "run-script",
                 "start",

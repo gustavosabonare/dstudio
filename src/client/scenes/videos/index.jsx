@@ -21,7 +21,7 @@ export default () => (
       banner />
 
     <main className="videos__article-container">
-      <iframe className="videos__iframe" src="https://www.youtube.com/embed/-2dNM2WCvF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+      <iframe className="videos__iframe" src="https://www.youtube.com/embed/-2dNM2WCvF8" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullscreen />
       <ul className='videos__playlist'>
         <li className='videos__video'>
           <img src={Convida1} />

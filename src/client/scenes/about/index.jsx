@@ -26,7 +26,7 @@ export default () => (
       banner />
 
     <main className="about__article-container">
-      {fakeCards.map((card, index) => <Card {...card} reverse={index % 3} />)}
+      {fakeCards.map((card, index) => <Card {...card} reverse={index % 3} vertical />)}
     </main>
   </div >
 );

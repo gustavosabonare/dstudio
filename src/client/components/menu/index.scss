@@ -10,13 +10,13 @@
     font-size: 30px;
     padding: 10px;
 
-    @include for-tablet-landscape-up {
+    @include for-tablet-landscape {
       font-size: 15px;
     }
   }
 
   &__bars {
-    margin-right: 50px;
+    margin-right: 10.4vw;
   }
 
   &__nav {
@@ -91,7 +91,7 @@
       margin: 20px auto;
       width: 60%;
 
-      @include for-tablet-landscape-up {
+      @include for-tablet-landscape {
         margin: 15px auto;
         width: 40%;
       }
@@ -108,7 +108,7 @@
       flex-direction: column;
       width: unset;
 
-      @include for-tablet-landscape-up {
+      @include for-tablet-landscape {
         font-size: 15px;
       }
 
@@ -129,7 +129,7 @@
           width: 100%;
           padding: 20px;
 
-          @include for-tablet-landscape-up {
+          @include for-tablet-landscape {
             padding: 15px;
           }
 
