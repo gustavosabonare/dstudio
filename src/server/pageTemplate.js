@@ -1,4 +1,4 @@
-export default (html) => {
+export default (html, preloadedState) => {
     return `<!DOCTYPE html>
     <html lang="en">
     
@@ -18,6 +18,10 @@ export default (html) => {
         <div id="root">
             ${html}
         </div>
+
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
+        </script>
 
         <script type="text/javascript" src="/bundle.js"></script>
     </body>

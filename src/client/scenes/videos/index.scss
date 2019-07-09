@@ -60,6 +60,10 @@
     align-items: center;
     cursor: pointer;  
 
+    &--active {
+      background: rgba(255,255,255,.1)
+    }
+
     &:hover {
       background: rgba(255,255,255,.1)
     }

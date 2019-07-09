@@ -1,78 +1,81 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 // Components
 import Highlight from '../../components/highlight';
 
+// Actions
+import { fetchEventsLogic } from '../../redux/actions/events';
+
 // Styles
 import './index.scss';
 
-// Convida Images
-import Convida1 from '../../assets/backgrounds/Convida1.png';
-import Convida2 from '../../assets/backgrounds/Convida2.png';
-import Convida3 from '../../assets/backgrounds/Convida3.png';
-import Convida4 from '../../assets/backgrounds/Convida4.png';
 
+class Videos extends React.Component {
+  static fetchData() {
+    return fetchEventsLogic();
+  }
 
-export default () => (
-  <div>
-    <Highlight
-      title="VIDEOS"
-      image="https://c.pxhere.com/photos/a3/68/audio_mixing_board_music_studio_audio_equipment_buttons_sliders_sound_music-1360063.jpg!d"
-      banner />
+  componentWillMount() {
+    if (!this.props.isRequesting && this.props.convidas.length === 0) {
+      this.props.fetchEvents();
+    }
+  }
 
-    <main className="videos__article-container">
-      <iframe className="videos__iframe" src="https://www.youtube.com/embed/-2dNM2WCvF8" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullscreen />
-      <ul className='videos__playlist'>
-        <li className='videos__video'>
-          <img src={Convida1} />
+  state = {
+    currentVideo: 0,
+  }
+
+  renderCards() {
+    return this.props.convidas.map((convida, index) => {
+      const classActive = this.state.currentVideo === index ? 'videos__video--active' : '';
+
+      return (
+        <li className={`videos__video ${classActive}`} onClick={() => this.setState({ currentVideo: index })}>
+          <img src={convida.image} />
           <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
+            <h3>{convida.title}</h3>
             <p>Studio Convida</p>
           </div>
         </li>
-        <li className='videos__video'>
-          <img src={Convida2} />
-          <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
-            <p>Studio Convida</p>
-          </div>
-        </li>
-        <li className='videos__video'>
-          <img src={Convida3} />
-          <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
-            <p>Studio Convida</p>
-          </div>
-        </li>
-        <li className='videos__video'>
-          <img src={Convida4} />
-          <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
-            <p>Studio Convida</p>
-          </div>
-        </li>
-        <li className='videos__video'>
-          <img src={Convida1} />
-          <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
-            <p>Studio Convida</p>
-          </div>
-        </li>
-        <li className='videos__video'>
-          <img src={Convida2} />
-          <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
-            <p>Studio Convida</p>
-          </div>
-        </li>
-        <li className='videos__video'>
-          <img src={Convida3} />
-          <div className='videos__video-info'>
-            <h3>Marcos Pagu</h3>
-            <p>Studio Convida</p>
-          </div>
-        </li>
-      </ul>
-    </main>
-  </div >
-);
+      )
+    })
+  }
+
+  render() {
+    const currentVideo = this.props.convidas[this.state.currentVideo];
+
+    return (
+      <div>
+        <Highlight
+          title="VIDEOS"
+          image="https://c.pxhere.com/photos/a3/68/audio_mixing_board_music_studio_audio_equipment_buttons_sliders_sound_music-1360063.jpg!d"
+          banner />
+
+        <main className="videos__article-container">
+          <iframe
+            className="videos__iframe"
+            src={currentVideo.videoUrl}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+          <ul className='videos__playlist'>
+            {this.renderCards()}
+          </ul>
+        </main>
+      </div >
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  isRequesting: state.events.requesting,
+  convidas: state.events && state.events.result && state.events.result.convidas || [],
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchEvents: () => dispatch(fetchEventsLogic()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Videos);

@@ -1,3 +1,5 @@
+import { getMedias } from '../services/wordpress';
+
 import { getVideoUrl, getContentWithoutHTML } from './post';
 
 function postBuilder(post) {
@@ -23,26 +25,36 @@ function buildSongPost(post) {
   }
 }
 
-function buildServicePost(post) {
-  const newPost = postBuilder(post);
-
-  return {
-    ...newPost, ... {
+async function buildServicePost(post) {
+  const newPost = {
+    ...postBuilder(post), ... {
       content: !post.content.protected && getContentWithoutHTML(post.content.rendered),
       details: !post.excerpt.protected && getContentWithoutHTML(post.excerpt.rendered)
     }
   }
+
+  try {
+    const image = await getMedias(post.id);
+    return { ...newPost, image: image[0].media_details.sizes.full.source_url };
+  } catch (err) {
+    return newPost;
+  }
 }
 
-function buildConvidaPost(post) {
-  const newPost = postBuilder(post);
-
-  return {
-    ...newPost, ... {
+async function buildConvidaPost(post) {
+  const newPost = {
+    ...postBuilder(post), ... {
       content: !post.content.protected && getContentWithoutHTML(post.content.rendered),
       details: !post.excerpt.protected && getContentWithoutHTML(post.excerpt.rendered),
       videoUrl: getVideoUrl(post.content.rendered)
     }
+  }
+
+  try {
+    const image = await getMedias(post.id);
+    return { ...newPost, image: image[0].media_details.sizes.full.source_url };
+  } catch (err) {
+    return newPost;
   }
 }
 

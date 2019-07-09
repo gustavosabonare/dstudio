@@ -16,7 +16,7 @@ function getPages() {
 
 function getServices() {
   const serviceURL = `${baseURL}posts`;
-  return getJson(serviceURL, { category: 60, per_page: perPage })
+  return getJson(serviceURL, { categories: 60, per_page: perPage })
 }
 
 function getSongs() {
@@ -24,9 +24,15 @@ function getSongs() {
   return getJson(serviceURL, { search: 'mp3', per_page: perPage })
 }
 
+function getMedias(parent) {
+  const serviceURL = `${baseURL}media`;
+  return getJson(serviceURL, { parent, per_page: perPage })
+}
+
 export {
   getConvidas,
   getPages,
   getServices,
-  getSongs
+  getSongs,
+  getMedias
 }

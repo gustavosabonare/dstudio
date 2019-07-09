@@ -16,11 +16,14 @@ async function pagesController(req, res) {
   }
 }
 
-async function convidasController(req, res) {
+async function convidasController(req, res, returnValue) {
 
   try {
     const convidasPosts = await getConvidas();
-    const newConvidaPosts = convidasPosts.map(buildConvidaPost);
+    const newConvidaPosts = await Promise.all(convidasPosts.map(buildConvidaPost));
+
+    if (returnValue === true)
+      return newConvidaPosts;
 
     return res.status(200).send(newConvidaPosts);
   } catch (err) {
@@ -31,7 +34,7 @@ async function convidasController(req, res) {
 async function servicesController(req, res) {
   try {
     const servicesPosts = await getServices();
-    const newServicesPosts = servicesPosts.map(buildServicePost);
+    const newServicesPosts = await Promise.all(servicesPosts.map(buildServicePost));
 
     return res.status(200).send(newServicesPosts);
   } catch (err) {
@@ -51,9 +54,21 @@ async function songsController(req, res) {
   }
 }
 
+async function eventsController(req, res) {
+  const eventsPosts = {};
+
+  try {
+    eventsPosts['convidas'] = await convidasController(null, null, true);
+    return res.status(200).send(eventsPosts);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+}
+
 export {
   convidasController,
   pagesController,
   servicesController,
-  songsController
+  songsController,
+  eventsController
 }

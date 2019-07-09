@@ -26,8 +26,22 @@ export default class PLayer extends Component {
     this.setState({ isPlaylistOpen: !this.state.isPlaylistOpen });
   }
 
-  render() {
+  renderMusic() {
     const playlistClass = this.state.isPlaylistOpen ? 'player__playlist--open' : '';
+
+    return (
+      <ul className={`player__playlist ${playlistClass}`}>
+        {this.props.musics && this.props.musics.map(music => (
+          <li>
+            <i className="fas fa-play"></i>
+            <p>{`${music.title} // ${music.mediaArtist}`}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  render() {
 
     return (
       <div className="player">
@@ -48,36 +62,8 @@ export default class PLayer extends Component {
             <i className="fas fa-play"></i>
             <i className="fas fa-forward"></i>
           </div>
-          <ul className={`player__playlist ${playlistClass}`}>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-            <li>
-              <i className="fas fa-play"></i>
-              <p>Saiadin // D Studio Apresenta</p>
-            </li>
-          </ul>
+
+          {this.renderMusic()}
         </div>}
         <span className="player__icon" onClick={this.onIconClick}>
           <i className="fas fa-music" />
