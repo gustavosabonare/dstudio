@@ -10,7 +10,10 @@
     cursor: pointer; 
     display: block;
     z-index: 999;
-    animation: pulsate-fwd 0.5s ease-in-out infinite both;
+
+    &--playing {
+      animation: pulsate-fwd 0.5s ease-in-out infinite both;
+    }
   }
 
   &__modal {
@@ -25,6 +28,7 @@
     align-items: center;
     animation: swing-in-bottom-fwd 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
     border-radius: 5px;
+    min-width: 280px;
   }
 
   &__banner {
@@ -46,6 +50,7 @@
     progress {
       -webkit-appearance: none;
       height: 5px;
+      cursor: pointer;
 
       &::-webkit-progress-value {
         background-color: #eee;
@@ -79,7 +84,7 @@
   &__playlist {
     width: 100%;
     background: rgba(0,0,0,0.2);
-    font-size: 12px;
+    font-size: 13px;
     margin: 0 0px;
     padding: 0;
     height: 0;
@@ -91,11 +96,15 @@
       height: 145px;
     }
 
-    li {
-      margin: 15px 0 15px 15px;
+    &-music {
+      padding: 10px 0 10px 15px;
       display: flex;
       align-items: center;
       cursor: pointer;
+
+      &--selected {
+        background: rgba(255, 255, 255, 0.25)
+      }
     }
 
     p {

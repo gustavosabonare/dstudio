@@ -20,7 +20,7 @@
     }
   }
 
-  &__iframe {
+  iframe {
     width: 63%; 
     @include for-tablet-landscape {
       width: 100%;

@@ -18,7 +18,6 @@ export function eventsReducer(state = INITIAL_STATE, action) {
   let newRequesting;
   let newState;
 
-  console.log(action);
   switch (action.type) {
     case FETCH_EVENTS:
       newError = INITIAL_STATE.error;

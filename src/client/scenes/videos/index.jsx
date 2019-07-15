@@ -10,8 +10,15 @@ import { fetchEventsLogic } from '../../redux/actions/events';
 // Styles
 import './index.scss';
 
-
 class Videos extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentVideo: 0,
+    }
+  }
+
   static fetchData() {
     return fetchEventsLogic();
   }
@@ -22,8 +29,37 @@ class Videos extends React.Component {
     }
   }
 
-  state = {
-    currentVideo: 0,
+  componentDidMount() {
+    this.player = new YT.Player('ytplayer', {
+      playerVars: {
+        frameborder: "0",
+        allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+        allowfullscreen: true,
+      },
+      height: 'unset',
+      width: 'unset',
+      events: {
+        onStateChange: this.onPlayerStateChange,
+        onReady: () => this.onVideoSelect()
+      },
+    })
+  }
+
+  onPlayerStateChange(evt) {
+    if (YT && evt.data === YT.PlayerState.PLAYING)
+      document.querySelector('audio').pause()
+  }
+
+  onVideoSelect(index) {
+    if (index && this.state.currentVideo !== index) {
+      this.setState({ currentVideo: index });
+      const currentVideo = this.props.convidas[index];
+
+      return this.player.cueVideoByUrl(currentVideo.videoUrl)
+    }
+
+    const currentVideo = this.props.convidas[this.state.currentVideo];
+    this.player.cueVideoByUrl(currentVideo.videoUrl);
   }
 
   renderCards() {
@@ -31,7 +67,7 @@ class Videos extends React.Component {
       const classActive = this.state.currentVideo === index ? 'videos__video--active' : '';
 
       return (
-        <li className={`videos__video ${classActive}`} onClick={() => this.setState({ currentVideo: index })}>
+        <li className={`videos__video ${classActive}`} onClick={() => this.onVideoSelect(index)}>
           <img src={convida.image} />
           <div className='videos__video-info'>
             <h3>{convida.title}</h3>
@@ -43,23 +79,20 @@ class Videos extends React.Component {
   }
 
   render() {
-    const currentVideo = this.props.convidas[this.state.currentVideo];
+    if (!this.props.convidas.length) {
+      return null;
+    }
 
     return (
-      <div>
+      <div className="videos">
         <Highlight
           title="VIDEOS"
           image="https://c.pxhere.com/photos/a3/68/audio_mixing_board_music_studio_audio_equipment_buttons_sliders_sound_music-1360063.jpg!d"
           banner />
 
         <main className="videos__article-container">
-          <iframe
-            className="videos__iframe"
-            src={currentVideo.videoUrl}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <div id="ytplayer">
+          </div>
           <ul className='videos__playlist'>
             {this.renderCards()}
           </ul>

@@ -27,7 +27,7 @@ export function servicesReducer(state = INITIAL_STATE, action) {
       return newState;
     case FETCH_SERVICES_SUCCESS:
       newRequesting = INITIAL_STATE.requesting;
-      newResult = [...state.result, ...action.payload.musics];
+      newResult = [...state.result, ...action.payload.services];
       newState = { ...state, requesting: newRequesting, result: newResult };
 
       return newState;

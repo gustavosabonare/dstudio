@@ -12,9 +12,9 @@ export function fetchServicesLogic() {
     dispatch(fetchServices());
 
     try {
-      const events = await wpServices();
+      const services = await wpServices();
 
-      dispatch(success(events));
+      dispatch(success(services));
     } catch (e) {
       console.log(e)
       dispatch(error(e.response.data.error));
@@ -36,11 +36,11 @@ export function fetchServices() {
   };
 }
 
-export function success(musics) {
+export function success(services) {
   return {
     type: FETCH_SERVICES_SUCCESS,
     payload: {
-      musics,
+      services,
     },
   };
 }

@@ -7,7 +7,7 @@
     "build:server": "webpack --build-type server",
     "build:client": "webpack --build-type front",
     "build": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "nodemon": "sleep 15 && node --inspect ./dist/server.js",
+    "nodemon": "sleep 10 && node --inspect ./dist/server.js",
     "start": "run-p -l build nodemon"
   },
   "repository": {

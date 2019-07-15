@@ -14,7 +14,8 @@ class PlayerContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchMusics();
+    if (!this.props.isRequesting && this.props.musics.length === 0)
+      this.props.fetchMusics();
   }
 
   render() {
@@ -24,11 +25,10 @@ class PlayerContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return ({
-    musics: state.musics && state.musics.result,
-  })
-};
+const mapStateToProps = state => ({
+  isRequesting: state.musics.requesting,
+  musics: state.musics && state.musics.result,
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchMusics: () => dispatch(fetchMusicsLogic),
