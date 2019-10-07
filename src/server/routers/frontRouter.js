@@ -6,9 +6,6 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
-// Constants
-import frontRoutes from '../contants/frontRoutes';
-
 // Template
 import pageTemplate from '../pageTemplate';
 
@@ -19,32 +16,27 @@ import rootReducer from '../../client/redux/reducers';
 
 
 export default function frontRouter(req, res) {
-  const frontRouteMatch = frontRoutes.reduce((acc, route) => matchPath(req.url, { path: route, exact: true }) || acc, null);
   const context = {};
 
-  if (frontRouteMatch) {
-    const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-    const dataRequirements = routes
-      .filter(route => matchPath(req.url, route) || route.path === '*') // filter matching paths
-      .map(route => route.component) // map to components
-      .filter(comp => comp.WrappedComponent && comp.WrappedComponent.fetchData) // check if components have data requirement
-      .map(comp => store.dispatch(comp.WrappedComponent.fetchData())); // dispatch data requirement
+  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+  const dataRequirements = routes
+    .filter(route => matchPath(req.url, route) || route.path === '*')
+    .map(route => route.component) // map to components
+    .filter(comp => comp.WrappedComponent && comp.WrappedComponent.fetchData) // check if components have data requirement
+    .map(comp => store.dispatch(comp.WrappedComponent.fetchData())); // dispatch data requirement
 
-    Promise.all(dataRequirements)
-      .then(() => {
-        const html = renderToString(
-          <Provider store={store} >
-            <StaticRouter location={req.url} context={context}>
-              <App />
-            </StaticRouter>
-          </Provider>
-        );
+  Promise.all(dataRequirements)
+    .then(() => {
+      const html = renderToString(
+        <Provider store={store} >
+          <StaticRouter location={req.url} context={context}>
+            <App />
+          </StaticRouter>
+        </Provider>
+      );
 
-        const preloadedState = store.getState();
+      const preloadedState = store.getState();
 
-        return res.status(200).send(pageTemplate(html, preloadedState))
-      })
-  }
-  else
-    return res.status(404).send('page not found');
+      return res.status(200).send(pageTemplate(html, preloadedState))
+    })
 }

@@ -22,13 +22,14 @@ export default class Menu extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
-  renderNav(linkCb = () => null) {
+  renderNav(linkCb) {
+    const { pages } = this.props;
+
     return (
       <nav className="menu__nav">
-        <li onClick={linkCb}><Link to='/'>INÍCIO</Link></li>
-        <li onClick={linkCb}><Link to='/about'>SOBRE</Link></li>
-        <li onClick={linkCb}><Link to='/services'>SERVIÇOS</Link></li>
-        <li onClick={linkCb}><Link to='/videos'>VIDEOS</Link></li>
+        {pages.map(page => (
+          <li onClick={linkCb}><Link to={page.url}>{page.title}</Link></li>
+        ))}
       </nav>
     )
   }

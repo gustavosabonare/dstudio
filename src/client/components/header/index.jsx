@@ -32,7 +32,7 @@ export default class Header extends Component {
         <Link to='/'>
           <img className="header__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
         </Link>
-        <Menu />
+        <Menu pages={this.props.pages} />
       </header>
     )
   }

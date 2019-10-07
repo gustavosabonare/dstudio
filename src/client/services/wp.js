@@ -10,6 +10,11 @@ const getAxiosConfig = () => ({
   },
 });
 
+// Pages
+export function wpPages() {
+  return get(`${baseUrl}pages`, getAxiosConfig());
+}
+
 // Songs
 export function wpMusics() {
 

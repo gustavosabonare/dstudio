@@ -5,12 +5,10 @@ import { getConvidas, getPages, getServices, getSongs } from '../services/wordpr
 import { buildConvidaPost, buildServicePost, buildSongPost, postBuilder } from '../helpers/postBuilder';
 
 async function pagesController(req, res) {
-
   try {
-    const pagesPosts = await getPages();
-    const newPagePosts = pagesPosts.map(postBuilder);
+    const pages = await getPages();
 
-    return res.status(200).send(newPagePosts);
+    return res.status(200).send(pages);
   } catch (err) {
     return res.status(500).send('Erro Interno');
   }

@@ -10,8 +10,8 @@ function getConvidas() {
 }
 
 function getPages() {
-  const serviceURL = `${baseURL}pages`;
-  return getJson(serviceURL, { per_page: perPage });
+  const serviceURL = `http://localhost:1337/pages`;
+  return getJson(serviceURL);
 }
 
 function getServices() {

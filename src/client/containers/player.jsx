@@ -31,7 +31,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchMusics: () => dispatch(fetchMusicsLogic),
+  fetchMusics: () => dispatch(fetchMusicsLogic()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);

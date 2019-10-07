@@ -7,7 +7,7 @@
     "build:server": "webpack --build-type server",
     "build:client": "webpack --build-type front",
     "build": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "nodemon": "sleep 10 && node --inspect ./dist/server.js",
+    "nodemon": "sleep 20 && node --inspect ./dist/server.js",
     "start": "run-p -l build nodemon"
   },
   "repository": {
@@ -45,7 +45,7 @@
     "css-loader": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
     "isomorphic-style-loader": "^5.0.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "resolve-url-loader": "^3.0.1",
     "sass-loader": "^7.1.0",

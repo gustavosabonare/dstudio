@@ -1,13 +1,7 @@
-import About from './about';
-import Convida from './convida';
-import Home from './home';
-import Services from './services';
-import Videos from './videos';
+import Page from './page';
+import Details from './details';
 
 export {
-    About,
-    Convida,
-    Home,
-    Services,
-    Videos
+    Page,
+    Details,
 }

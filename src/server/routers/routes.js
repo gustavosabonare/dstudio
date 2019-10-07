@@ -1,14 +1,12 @@
 // Scenes
 import {
-  About,
-  Convida,
-  Home,
-  Services,
-  Videos
+  Details,
+  Page,
 } from '../../client/scenes';
 
 // Containers
 import PlayerContainer from '../../client/containers/player';
+import HeaderContainer from '../../client/containers/header';
 
 export default [
   {
@@ -17,28 +15,18 @@ export default [
     exact: true
   },
   {
+    path: '*',
+    component: HeaderContainer,
+    exact: true
+  },
+  {
     path: "/",
-    component: Home,
-    exact: true
+    component: Page,
+    exact: true,
   },
   {
-    path: "/about",
-    component: About,
-    exact: true
-  },
-  {
-    path: "/videos",
-    component: Videos,
-    exact: true
-  },
-  {
-    path: "/services",
-    component: Services,
-    exact: true
-  },
-  {
-    path: "/convida/:id",
-    component: Convida,
+    path: "/details/:id",
+    component: Details,
     exact: true
   }
 ];
