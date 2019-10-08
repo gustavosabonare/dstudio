@@ -28,7 +28,7 @@ export default class Menu extends Component {
     return (
       <nav className="menu__nav">
         {pages.map(page => (
-          <li onClick={linkCb}><Link to={page.url}>{page.title}</Link></li>
+          <li key={page.id} onClick={linkCb}><Link to={page.url}>{page.title}</Link></li>
         ))}
       </nav>
     )

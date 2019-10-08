@@ -20,7 +20,7 @@ export default [
     exact: true
   },
   {
-    path: "/",
+    path: "/:page?",
     component: Page,
     exact: true,
   },

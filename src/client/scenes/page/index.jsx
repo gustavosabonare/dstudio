@@ -5,49 +5,80 @@ import { connect } from 'react-redux';
 // Components
 import Highlight from '../../components/highlight';
 import Carousel from '../../components/carousel';
+import Card from '../../components/card';
+import VideoPlayer from '../../components/videoPlayer';
 
-// Actions
-import { fetchEventsLogic } from '../../redux/actions/events';
-
-const fakeConvida = {
-  id: 1,
-  title: 'Coletivo Central - D Studio Convida',
-  text: 'No segundo programa desta temporada, convidamos a banda Coletivo central que tem suas vertentes voltadas para o pop rock nacional e vem batalhando pra fazer acontecer.',
-  image: "http://diademastudio.com.br/wp-content/uploads/2017/11/DSC_0164.jpg",
-  more: true
-}
+import './index.scss';
 
 class Page extends React.Component {
-  static fetchData() {
-    return fetchEventsLogic();
+  renderHighlight() {
+    return <Highlight
+      events={this.props.page.banner && this.props.page.banner.events}
+      pageTitle={this.props.page.title}
+      pageBackground={this.props.page.background && `http://localhost:1337${this.props.page.background.url}`}
+    />
   }
 
-  componentWillMount() {
-    if (!this.props.isRequesting && this.props.convidas.length === 0) {
-      this.props.fetchEvents();
+  renderCarousels() {
+    if (this.props.page.carrousels) {
+      return (
+        <div className="page__carousels-container">
+          {this.props.page.carrousels.map(carrousel => (
+            <Carousel key={carrousel.id} title={carrousel.title} events={carrousel.events} onClick={(id) => this.props.history.push(`details/${id}`)} />
+          ))}
+        </div>
+      )
+    }
+  }
+
+  renderCards() {
+    if (this.props.page.cards) {
+      return (
+        <div className="page__cards-container">
+          {this.props.page.cards.map(card => (
+            <Card key={card.id} {...card} />
+          ))}
+        </div>
+      )
+    }
+  }
+
+  renderVideoPlayer() {
+    if (this.props.page.playlist) {
+      return <VideoPlayer videos={this.props.page.playlist.videos} />
     }
   }
 
   render() {
+    const { page } = this.props;
+
+    if (!page) {
+      return null;
+    }
+
     return (
-      <div>
-        <Highlight {...fakeConvida} />
+      <div className="page">
+        {this.renderHighlight()}
 
         <main>
-          <Carousel title='D Studio Convida' events={this.props.convidas} onClick={(id) => this.props.history.push(`convida/${id}`)} />
+          {this.renderVideoPlayer()}
+          {this.renderCarousels()}
+          {this.renderCards()}
         </main>
       </div >
     )
   }
 }
 
-const mapStateToProps = state => ({
-  isRequesting: state.events.requesting,
-  convidas: state.events && state.events.result && state.events.result.convidas || [],
-})
+const mapStateToProps = (state, ownProps) => {
+  const currentPage = state.pages.result.filter(page => page.url === ownProps.match.url)[0];
 
-const mapDispatchToProps = dispatch => ({
-  fetchEvents: () => dispatch(fetchEventsLogic),
-});
+  return ({
+    pageLoading: state.pages.requesting,
+    page: currentPage,
+  })
+}
+
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

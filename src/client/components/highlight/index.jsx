@@ -4,22 +4,35 @@ import { Link } from 'react-router-dom';
 //Styles
 import './index.scss';
 
-export default ({ title = '', text = '', image = '', more = false, id, banner }) => {
-  const bannerClass = banner ? 'highlight--banner' : null;
+export default ({ events, pageTitle, pageBackground }) => {
+  if (!events) {
+    return (
+      <div className={`highlight highlight--banner`}>
+        <div className="highlight__filter"></div>
+        <img className="highlight__image" src={pageBackground} />
+        <div className="highlight__shadow"></div>
+        <div className="highlight__info">
+          <h3 className="highlight__title">{pageTitle}</h3>
+        </div>
+      </div>
+    );
+  };
+
+  const { title, description, image, id } = events[0];
 
   return (
-    <div className={`highlight ${bannerClass}`}>
+    <div className={`highlight`}>
       <div className="highlight__filter"></div>
-      <img className="highlight__image" src={image} />
+      <img className="highlight__image" src={`http://localhost:1337${image.url}`} />
       <div className="highlight__shadow"></div>
       <div className="highlight__info">
         <h3 className="highlight__title">{title}</h3>
-        <p className="highlight__description">{text}</p>
-        {more && <button className="highlight__button">
-          <Link to={`/convida/${id}`}>
+        <p className="highlight__description">{description}</p>
+        <button className="highlight__button">
+          <Link to={`/details/${id}`}>
             Saiba mais
           </Link>
-        </button>}
+        </button>
       </div>
     </div>
   )

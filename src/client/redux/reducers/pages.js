@@ -27,7 +27,7 @@ export function pagesReducer(state = INITIAL_STATE, action) {
       return newState;
     case FETCH_PAGES_SUCCESS:
       newRequesting = INITIAL_STATE.requesting;
-      newResult = [...state.result, ...action.payload.pages];
+      newResult = [...action.payload.pages];
       newState = { ...state, requesting: newRequesting, result: newResult };
 
       return newState;

@@ -5,20 +5,20 @@ import Slider from "react-slick";
 import './index.scss';
 
 const renderCards = (props) => props.events.map(event => (
-  <article className="events__content" onClick={() => props.onClick(event.id)}>
-    <img className="events__content-image" src={event.image} />
+  <article key={event.id} className="events__content" onClick={() => props.onClick(event.id)}>
+    <img className="events__content-image" src={`http://localhost:1337${event.image.url}`} />
     <span className="events__content-overlay"></span>
 
     <div className="events__content-info">
       <h4 className="events__content-title">{event.title}</h4>
-      <p className="events__content-description">{event.content}</p>
+      <p className="events__content-description">{event.description}</p>
     </div>
   </article>
 ));
 
 export default (props) => {
   var settings = {
-    infinite: true,
+    infinite: props.events.length >= 6,
     arrows: true,
     slidesToShow: 6,
     slidesToScroll: 4,
@@ -26,6 +26,7 @@ export default (props) => {
       {
         breakpoint: 900,
         settings: {
+          infinite: props.events.length >= 4,
           slidesToShow: 4,
           slidesToScroll: 3,
         }
@@ -33,6 +34,7 @@ export default (props) => {
       {
         breakpoint: 600,
         settings: {
+          infinite: props.events.length >= 2,
           slidesToShow: 2,
           slidesToScroll: 1,
         }

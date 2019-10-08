@@ -8,14 +8,13 @@ export const FETCH_PAGES_ERROR = 'FETCH_PAGES_ERROR';
 export const CLEAR_PAGES = 'CLEAR_PAGES';
 
 export function fetchPagesLogic() {
-  console.log('action');
   return async (dispatch) => {
     dispatch(fetchPages());
 
     try {
-      const musics = await wpPages();
+      const pages = await wpPages();
 
-      dispatch(success(musics));
+      dispatch(success(pages));
     } catch (e) {
       dispatch(error(e));
     }
@@ -31,7 +30,6 @@ export function clearPages() {
 }
 
 export function fetchPages() {
-  console.log('fetch action')
   return {
     type: FETCH_PAGES,
   };

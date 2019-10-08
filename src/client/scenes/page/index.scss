@@ -1,7 +1,7 @@
 @import '../../utils/mixins';
 
-.services {
-  &__article-container {
+.page {
+  &__cards-container {
     color: white;
     display: flex;
     flex-wrap: wrap;

@@ -97,7 +97,7 @@ export default class PLayer extends Component {
           const selectedMusicClass = currentPlayingIndex === index ? 'player__playlist-music--selected': '';
 
           return (
-            <li className={`player__playlist-music ${selectedMusicClass}`} onClick={() => { this.setState({ currentPlayingIndex: index }); }}>
+            <li key={music.title} className={`player__playlist-music ${selectedMusicClass}`} onClick={() => { this.setState({ currentPlayingIndex: index }); }}>
               {currentPlayingIndex === index && isPlaying ? 
                 <i className="fas fa-pause" onClick={this.playPauseAudio} /> : 
                 <i className="fas fa-play" onClick={this.playPauseAudio} />}
