@@ -32,7 +32,7 @@ export default class PLayer extends Component {
     const { musics } = this.props;
 
     if (musics && musics.length > 0) {
-      this.audio.current.addEventListener('timeupdate', e => this.setState({ currentPlayTime: e.target.currentTime}));
+      this.audio.current.addEventListener('timeupdate', e => { console.log(e.target.currentTime); this.setState({ currentPlayTime: e.target.currentTime}) });
       this.audio.current.addEventListener('ended', this.nextMusic);
       this.audio.current.addEventListener('play', () => this.setState({ isPlaying: true }));
       this.audio.current.addEventListener('pause', () => this.setState({ isPlaying: false }));
@@ -101,7 +101,7 @@ export default class PLayer extends Component {
               {currentPlayingIndex === index && isPlaying ? 
                 <i className="fas fa-pause" onClick={this.playPauseAudio} /> : 
                 <i className="fas fa-play" onClick={this.playPauseAudio} />}
-              <p>{`${music.title} // ${music.mediaArtist}`}</p>
+              <p>{`${music.title} // ${music.artist}`}</p>
             </li>
           )
         })}
@@ -119,17 +119,17 @@ export default class PLayer extends Component {
 
     return (
       <div className="player">
-        <audio ref={this.audio} className="player__audio" autoPlay src={currentMusic.mediaUrl} />
+        <audio ref={this.audio} className="player__audio" autoPlay src={currentMusic && `http://localhost:1337${currentMusic.media.url}`} />
         {this.state.isModalOpen && <div className="player__modal">
           <div className="player__banner">
-            <i className="far fa-image" />
+            <img src={currentMusic.image || 'http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png'} className="player__image" />
           </div>
           <div className="player__progress">
             <span className="player__progress-time">{secondsToMinutes(currentPlayTime)}</span>
-            <progress ref={this.progressBar} max={currentMusic.mediaLength || 100} value={currentPlayTime || 0}> </progress>
-            <span className="player__progress-time">{secondsToMinutes(currentMusic.mediaLength)}</span>
+            <progress ref={this.progressBar} max={this.audio.current.duration || 100} value={currentPlayTime || 0}> </progress>
+            <span className="player__progress-time">{this.audio.current.duration && secondsToMinutes(this.audio.current.duration) || '00:00'}</span>
           </div>
-          <p className="player__title">{currentMusic.title} // {currentMusic.mediaArtist}</p>
+          <p className="player__title">{currentMusic.title} // {currentMusic.artist}</p>
           <div className="player__controls">
             <i className="fas fa-list" onClick={this.onPlaylistClick} />
             <i className="fas fa-backward" onClick={this.prevMusic}/>

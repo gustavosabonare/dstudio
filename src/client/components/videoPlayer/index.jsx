@@ -9,23 +9,37 @@ class VideoPlayer extends React.Component {
 
     this.state = {
       currentVideo: 0,
+      playerAPI: false,
+    }
+  }
+
+  initYoutube() {
+    if (YT.Player) {
+      this.player = YT.Player && new YT.Player('ytplayer', {
+        playerVars: {
+          frameborder: "0",
+          allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+          allowfullscreen: true,
+        },
+        height: 'unset',
+        width: 'unset',
+        events: {
+          onStateChange: this.onPlayerStateChange,
+          onReady: () => this.onVideoSelect()
+        },
+      })
+
+      this.setState({ playerAPI: true });
     }
   }
 
   componentDidMount() {
-    this.player = new YT.Player('ytplayer', {
-      playerVars: {
-        frameborder: "0",
-        allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
-        allowfullscreen: true,
-      },
-      height: 'unset',
-      width: 'unset',
-      events: {
-        onStateChange: this.onPlayerStateChange,
-        onReady: () => this.onVideoSelect()
-      },
-    })
+    this.initYoutube();
+  }
+
+  componentDidUpdate() {
+    if (!this.state.playerAPI)
+      this.initYoutube();
   }
 
   onPlayerStateChange(evt) {
@@ -51,10 +65,10 @@ class VideoPlayer extends React.Component {
 
       return (
         <li key={video.title} className={`videos__video ${classActive}`} onClick={() => this.onVideoSelect(index)}>
-          <img src={video.image} />
+          <img src={video.image || 'http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png'} />
           <div className='videos__video-info'>
             <h3>{video.title}</h3>
-            <p>Studio Convida</p>
+            <p>{video.description}</p>
           </div>
         </li>
       )
@@ -66,11 +80,16 @@ class VideoPlayer extends React.Component {
       return null;
     }
 
+    const { currentVideo } = this.state;
+    const currentVideoSelected = this.props.videos[currentVideo];
+
+
     return (
       <div className="videos">
         <main className="videos__article-container">
           <div id="ytplayer">
           </div>
+          {this.state.playerAPI ? null : <iframe frameborder="0" src={currentVideoSelected.link} />}
           <ul className='videos__playlist'>
             {this.renderCards()}
           </ul>

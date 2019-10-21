@@ -43,10 +43,9 @@ async function servicesController(req, res) {
 async function songsController(req, res) {
 
   try {
-    const songsPosts = await getSongs();
-    const newSongsPost = songsPosts.map(buildSongPost);
+    const songs = await getSongs();
 
-    return res.status(200).send(newSongsPost);
+    return res.status(200).send(songs);
   } catch (err) {
     return res.status(500).send('Erro Interno');
   }

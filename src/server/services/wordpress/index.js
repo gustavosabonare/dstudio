@@ -20,8 +20,8 @@ function getServices() {
 }
 
 function getSongs() {
-  const serviceURL = `${baseURL}media`;
-  return getJson(serviceURL, { search: 'mp3', per_page: perPage })
+  const serviceURL = `http://localhost:1337/playlists`;
+  return getJson(serviceURL)
 }
 
 function getMedias(parent) {

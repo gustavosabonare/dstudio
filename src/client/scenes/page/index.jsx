@@ -44,7 +44,7 @@ class Page extends React.Component {
   }
 
   renderVideoPlayer() {
-    if (this.props.page.playlist) {
+    if (this.props.page.playlist && this.props.page.playlist.player === 'Youtube') {
       return <VideoPlayer videos={this.props.page.playlist.videos} />
     }
   }

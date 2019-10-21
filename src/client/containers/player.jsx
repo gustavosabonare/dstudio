@@ -25,10 +25,15 @@ class PlayerContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isRequesting: state.musics.requesting,
-  musics: state.musics && state.musics.result,
-})
+const mapStateToProps = state => {
+  const playlists = state.musics.result;
+  const musicPlaylists = playlists && playlists.filter(playlist => playlist.player === 'Musicas' && playlist.active);
+
+  return ({
+    isRequesting: state.musics.requesting,
+    musics: musicPlaylists && musicPlaylists[0].songs || [],
+  })
+}
 
 const mapDispatchToProps = dispatch => ({
   fetchMusics: () => dispatch(fetchMusicsLogic()),
