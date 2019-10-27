@@ -1,7 +1,7 @@
 import Page from './page';
-import Details from './details';
+import Event from './event';
 
 export {
     Page,
-    Details,
+    Event,
 }

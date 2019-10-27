@@ -1,6 +1,6 @@
 // Scenes
 import {
-  Details,
+  Event,
   Page,
 } from '../../client/scenes';
 
@@ -26,7 +26,7 @@ export default [
   },
   {
     path: "/details/:id",
-    component: Details,
+    component: Event,
     exact: true
   }
 ];

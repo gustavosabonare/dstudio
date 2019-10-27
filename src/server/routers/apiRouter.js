@@ -7,7 +7,7 @@ export default function apiRouter(router) {
   router.get('/convidas', convidasController)
   router.get('/songs', songsController)
   router.get('/pages', pagesController)
-  router.get('/events', eventsController)
+  router.get('/events/:id', eventsController)
 
   return router;
 }

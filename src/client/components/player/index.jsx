@@ -119,7 +119,7 @@ export default class PLayer extends Component {
 
     return (
       <div className="player">
-        <audio ref={this.audio} className="player__audio" autoPlay src={currentMusic && `http://localhost:1337${currentMusic.media.url}`} />
+        <audio ref={this.audio} className="player__audio" src={currentMusic && `http://localhost:1337${currentMusic.media.url}`} />
         {this.state.isModalOpen && <div className="player__modal">
           <div className="player__banner">
             <img src={currentMusic.image || 'http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png'} className="player__image" />

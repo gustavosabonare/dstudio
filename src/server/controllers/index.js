@@ -1,5 +1,5 @@
 // Services
-import { getConvidas, getPages, getServices, getSongs } from '../services/wordpress';
+import { getConvidas, getPages, getServices, getSongs, getEvents } from '../services/wordpress';
 
 // Helpers
 import { buildConvidaPost, buildServicePost, buildSongPost, postBuilder } from '../helpers/postBuilder';
@@ -52,11 +52,12 @@ async function songsController(req, res) {
 }
 
 async function eventsController(req, res) {
-  const eventsPosts = {};
+  const { id } = req.params;
 
   try {
-    eventsPosts['convidas'] = await convidasController(null, null, true);
-    return res.status(200).send(eventsPosts);
+    const event = await getEvents(id);
+
+    return res.status(200).send(event);
   } catch (err) {
     return res.status(500).send(err);
   }

@@ -17,13 +17,14 @@ import rootReducer from '../../client/redux/reducers';
 
 export default function frontRouter(req, res) {
   const context = {};
+  let currentMatch;
 
   const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
   const dataRequirements = routes
-    .filter(route => matchPath(req.url, route) || route.path === '*')
+    .filter(route => { currentMatch = matchPath(req.url, route); return currentMatch || route.path === '*' })
     .map(route => route.component) // map to components
     .filter(comp => comp.WrappedComponent && comp.WrappedComponent.fetchData) // check if components have data requirement
-    .map(comp => store.dispatch(comp.WrappedComponent.fetchData())); // dispatch data requirement
+    .map(comp => store.dispatch(comp.WrappedComponent.fetchData(currentMatch && currentMatch.params))); // dispatch data requirement
 
   Promise.all(dataRequirements)
     .then(() => {

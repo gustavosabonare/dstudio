@@ -1,0 +1,88 @@
+@import '../../utils/mixins';
+
+.event {
+  &__event-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2% 15%;
+
+    @include for-notebook {
+      margin: 5% 5%;
+    }
+
+    @include for-tablet-landscape {
+      margin: 5% 11%;
+    }
+  
+    @include for-phone-only {
+      margin: 3% 11%;
+
+      flex-direction: column;
+    }
+  }
+
+  &__description {
+    color: white;
+    font-size: 25px;
+    width: 30%;
+    margin-right: 5%;
+    margin-bottom: 40px;
+
+    @include for-tablet-landscape {
+      width: 50%;
+      font-size: 20px;
+      margin-right: 3%;
+    }
+
+    @include for-phone-only {
+      width: 100%;
+      order: 1;
+    }
+
+  }
+
+  &__video-container {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    display: flex;
+    flex: 1;
+    height: 500px;
+    width: 65%;
+    margin-bottom: 40px;
+
+    @include for-tablet-landscape {
+      width: 47%;
+      flex-direction: column;
+      height: max-content;
+      width: 100%;
+      flex: unset;
+    }
+  
+    @include for-phone-only {
+      width: 100%;
+      order: 2;
+    }
+  }
+
+  &__image-container {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    display: flex;
+    width: 65%;
+    margin-bottom: 40px;
+
+    img {
+      width: 100%;
+    }
+  
+    @include for-tablet-landscape {
+      width: 47%;
+      height: max-content;
+    }
+  
+    @include for-phone-only {
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      width: 100%;
+      margin-bottom: 40px;
+      order: 0;
+    }
+  }
+}

@@ -7,7 +7,7 @@ import PlayerContainer from './containers/player';
 
 // Scenes
 import {
-  Details,
+  Event,
   Page,
 } from './scenes';
 
@@ -16,7 +16,7 @@ export default (props) => (
     <HeaderContainer />
     <PlayerContainer />
     <Switch>
-      <Route path='/details/:id' component={Details} exact />
+      <Route path='/details/:id' component={Event} exact />
       <Route path='/:page?' component={Page} />
     </Switch>
   </Fragment>

@@ -9,6 +9,11 @@ function getConvidas() {
   return getJson(serviceURL, { categories: 57, per_page: perPage })
 }
 
+function getEvents(id) {
+  const serviceURL = `http://localhost:1337/events/${id}`;
+  return getJson(serviceURL)
+}
+
 function getPages() {
   const serviceURL = `http://localhost:1337/pages`;
   return getJson(serviceURL);
@@ -34,5 +39,6 @@ export {
   getPages,
   getServices,
   getSongs,
-  getMedias
+  getMedias,
+  getEvents
 }

@@ -83,17 +83,16 @@ class VideoPlayer extends React.Component {
     const { currentVideo } = this.state;
     const currentVideoSelected = this.props.videos[currentVideo];
 
-
     return (
       <div className="videos">
-        <main className="videos__article-container">
-          <div id="ytplayer">
-          </div>
-          {this.state.playerAPI ? null : <iframe frameborder="0" src={currentVideoSelected.link} />}
+        <div id="ytplayer">
+        </div>
+        {this.state.playerAPI ? null : <iframe frameBorder="0" src={currentVideoSelected.link} />}
+        {this.props.videos.length > 1 && (
           <ul className='videos__playlist'>
             {this.renderCards()}
           </ul>
-        </main>
+        )}
       </div>
     );
   }
