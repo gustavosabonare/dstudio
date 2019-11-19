@@ -1,3 +1,5 @@
+/* globals process */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +25,7 @@ export default ({ events, pageTitle, pageBackground }) => {
   return (
     <div className={`highlight`}>
       <div className="highlight__filter"></div>
-      <img className="highlight__image" src={`http://localhost:1337${image.url}`} />
+      <img className="highlight__image" src={`${process.env.EXTERNAL_CMS_URL}${image.url}`} />
       <div className="highlight__shadow"></div>
       <div className="highlight__info">
         <h3 className="highlight__title">{title}</h3>

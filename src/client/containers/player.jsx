@@ -31,7 +31,7 @@ const mapStateToProps = state => {
 
   return ({
     isRequesting: state.musics.requesting,
-    musics: musicPlaylists && musicPlaylists[0].songs || [],
+    musics: musicPlaylists && musicPlaylists[0] && musicPlaylists[0].songs || [],
   })
 }
 

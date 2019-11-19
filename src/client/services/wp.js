@@ -1,24 +1,26 @@
+/* globals process */
+
 // Helpers
 import get from '../helpers/http';
 
-const baseUrl = 'http://localhost:3000/api/';
-
+const serverUrl = process.env.SERVER_URL || 'http://localhost:3000';
 // Pages
 export function wpPages() {
-  return get(`${baseUrl}pages`);
+  console.log
+  return get(`${serverUrl}/api/pages`);
 }
 
 // Songs
 export function wpMusics() {
-  return get(`${baseUrl}songs`);
+  return get(`${serverUrl}/api/songs`);
 }
 
 // Event
 export function wpEvent(id) {
-  return get(`${baseUrl}events/${id}`);
+  return get(`${serverUrl}/api/events/${id}`);
 }
 
 // Services
 export function wpServices() {
-  return get(`${baseUrl}services`);
+  return get(`${serverUrl}/api/services`);
 }

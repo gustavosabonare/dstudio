@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const commonConfig = {
   module: {
@@ -20,18 +21,18 @@ const commonConfig = {
     }]
   },
 
-  devtool: 'source-map'
+  devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false
 }
 
-const serverConfig = {
-  mode: 'development',
+const serverConfig = ({
+  mode: process.env.NODE_ENV,
   entry: ['babel-polyfill', './src/server/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'server.js'
   },
 
-  watch: true,
+  watch: process.env.NODE_ENV === 'development',
   target: 'node',
   externals: [nodeExternals()],
 
@@ -43,37 +44,68 @@ const serverConfig = {
     rules: [{
       test: /\.s?css$/,
       resolve: { extensions: [".css", ".scss"] },
-      use: ['css-loader', 'sass-loader', 'resolve-url-loader']
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development',
+          },
+        },
+        'css-loader',
+        'sass-loader',
+        'resolve-url-loader'
+      ]
     }]
   },
-}
+})
 
-const frontConfig = {
-  mode: 'development',
+const frontConfig = ({
+  mode: process.env.NODE_ENV,
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client',
     './src/client/index.js'
   ],
+
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.EXTERNAL_CMS_URL': JSON.stringify(process.env.EXTERNAL_CMS_URL),
+      'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
+
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: true,
+    }),
   ],
 
   module: {
     rules: [{
       test: /\.s?css$/,
       resolve: { extensions: [".css", ".scss"] },
-      use: ['style-loader', 'css-loader', 'sass-loader', 'resolve-url-loader']
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development',
+          },
+        },
+        'css-loader',
+        'sass-loader',
+        'resolve-url-loader'
+      ]
     }]
   },
-}
+})
 
 module.exports = (env, argv) => merge.smart(
   argv.buildType === "server" ? serverConfig : {},

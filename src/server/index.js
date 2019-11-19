@@ -1,25 +1,15 @@
 import express from 'express';
-import webpack from 'webpack';
 import path from 'path';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-
-import webpackConfig from '../../webpack.config';
+import morgan from 'morgan';
 
 // Routers
 import frontRouter from './routers/frontRouter';
 import apiRouter from './routers/apiRouter';
 
 const app = express();
-const port = 3000;
-const frontWebpackConfig = webpackConfig(null, { buildType: 'front' });
-const compiler = webpack(frontWebpackConfig);
+const port = process.env.PORT_WEB || 3000;
 
-app.use(webpackDevMiddleware(compiler, {
-    noInfo: false, publicPath: frontWebpackConfig.output.publicPath
-}));
-
-app.use(webpackHotMiddleware(compiler));
+app.use(morgan('tiny'));
 
 app.use(express.static(path.join(__dirname, "../dist")));
 
