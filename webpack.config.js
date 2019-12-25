@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 const commonConfig = {
   module: {
@@ -19,6 +21,14 @@ const commonConfig = {
       use: 'url-loader',
     }]
   },
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: true,
+    }),
+  ],
 
   devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false
 }
@@ -43,7 +53,17 @@ const serverConfig = ({
     rules: [{
       test: /\.s?css$/,
       resolve: { extensions: [".css", ".scss"] },
-      use: ['css-loader', 'sass-loader', 'resolve-url-loader']
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development',
+          },
+        },
+        'css-loader',
+        'sass-loader',
+        'resolve-url-loader'
+      ]
     }]
   },
 })
@@ -75,7 +95,17 @@ const frontConfig = ({
     rules: [{
       test: /\.s?css$/,
       resolve: { extensions: [".css", ".scss"] },
-      use: ['style-loader', 'css-loader', 'sass-loader', 'resolve-url-loader']
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development',
+          },
+        },
+        'css-loader',
+        'sass-loader',
+        'resolve-url-loader'
+      ]
     }]
   },
 })
