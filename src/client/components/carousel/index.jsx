@@ -1,3 +1,5 @@
+/* globals process */
+
 import React from 'react';
 import Slider from "react-slick";
 
@@ -6,7 +8,7 @@ import './index.scss';
 
 const renderCards = (props) => props.events.map(event => (
   <article key={event.id} className="events__content" onClick={() => props.onClick(event.id)}>
-    <img className="events__content-image" src={`http://localhost:1337${event.image.url}`} />
+    <img className="events__content-image" src={`${process.env.EXTERNAL_CMS_URL}${event.image.url}`} />
     <span className="events__content-overlay"></span>
 
     <div className="events__content-info">

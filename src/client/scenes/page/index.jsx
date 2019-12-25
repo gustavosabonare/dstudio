@@ -1,3 +1,5 @@
+/* globals process */
+
 import React from 'react';
 
 import { connect } from 'react-redux';
@@ -15,7 +17,7 @@ class Page extends React.Component {
     return <Highlight
       events={this.props.page.banner && this.props.page.banner.events}
       pageTitle={this.props.page.title}
-      pageBackground={this.props.page.background && `http://localhost:1337${this.props.page.background.url}`}
+      pageBackground={this.props.page.background && `${process.env.EXTERNAL_CMS_URL}${this.props.page.background.url}`}
     />
   }
 

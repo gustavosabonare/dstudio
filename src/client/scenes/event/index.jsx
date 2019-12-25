@@ -1,3 +1,5 @@
+/* globals process */
+
 import React from 'react';
 
 import { connect } from 'react-redux';
@@ -31,7 +33,7 @@ class EventContainer extends React.Component {
     return this.props.event && (
       <Highlight
         pageTitle={this.props.event.title}
-        pageBackground={this.props.event.image && `http://localhost:1337${this.props.event.image.url}`}
+        pageBackground={this.props.event.image && `${process.env.EXTERNAL_CMS_URL}${this.props.event.image.url}`}
       />
     )
   }
@@ -44,7 +46,7 @@ class EventContainer extends React.Component {
 
   renderEventImage() {
     return this.props.event && (
-      <img src={`http://localhost:1337${this.props.event.image.url}`} />
+      <img src={`${process.env.EXTERNAL_CMS_URL}${this.props.event.image.url}`} />
     );
   }
 

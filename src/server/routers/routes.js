@@ -1,8 +1,5 @@
 // Scenes
-import {
-  Event,
-  Page,
-} from '../../client/scenes';
+import { Event, Page } from '../../client/scenes';
 
 // Containers
 import PlayerContainer from '../../client/containers/player';
