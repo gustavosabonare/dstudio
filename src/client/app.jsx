@@ -11,6 +11,8 @@ import {
   Page,
 } from './scenes';
 
+import "./app.scss";
+
 export default (props) => (
   <Fragment>
     <HeaderContainer />

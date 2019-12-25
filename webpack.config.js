@@ -21,6 +21,14 @@ const commonConfig = {
     }]
   },
 
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: true,
+    }),
+  ],
+
   devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false
 }
 
@@ -76,16 +84,10 @@ const frontConfig = ({
     new webpack.DefinePlugin({
       'process.env.EXTERNAL_CMS_URL': JSON.stringify(process.env.EXTERNAL_CMS_URL),
       'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
-
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: true,
-    }),
   ],
 
   module: {

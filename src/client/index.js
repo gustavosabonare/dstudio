@@ -9,7 +9,6 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import rootReducer from './redux/reducers';
 import App from './app';
 
-import "./index.css";
 
 const preloadedState = window.__PRELOADED_STATE__
 
