@@ -103,10 +103,10 @@
       flex-direction: column;
     }
 
-    @include for-phone-only {
+    @include for-tablet-landscape {
       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-      height: 400px;
       margin: 3% 5%;
+      height: 190px;
     }
   }
 }
