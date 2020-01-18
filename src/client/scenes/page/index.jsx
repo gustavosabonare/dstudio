@@ -1,7 +1,7 @@
 /* globals process */
 
 import React from 'react';
-
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 // Components
@@ -64,6 +64,15 @@ class Page extends React.Component {
 
     return (
       <div className="page">
+        <Helmet>
+          <title>Dstudio - {page.title}</title>
+          <meta property="og:title" content={`Dstudio - ${page.title}`} />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content={`${process.env.EXTERNAL_CMS_URL}/uploads/d1063e568dba4c29bb2a71f4578ba648.png`} />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:alt" content={`Dstudio - ${page.title}`} />
+        </Helmet>
+
         {this.renderHighlight()}
 
         <main>

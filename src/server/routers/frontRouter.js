@@ -5,6 +5,7 @@ import { matchPath, StaticRouter } from 'react-router';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import { Helmet } from 'react-helmet';
 
 // Template
 import pageTemplate from '../pageTemplate';
@@ -13,7 +14,6 @@ import pageTemplate from '../pageTemplate';
 import App from '../../client/app';
 import routes from './routes';
 import rootReducer from '../../client/redux/reducers';
-
 
 export default function frontRouter(req, res) {
   const context = {};
@@ -36,8 +36,10 @@ export default function frontRouter(req, res) {
         </Provider>
       );
 
+      const helmet = Helmet.renderStatic();
+
       const preloadedState = store.getState();
 
-      return res.status(200).send(pageTemplate(html, preloadedState))
+      return res.status(200).send(pageTemplate(html, helmet, preloadedState))
     })
 }

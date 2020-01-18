@@ -6,7 +6,6 @@ import get from '../helpers/http';
 const serverUrl = process.env.SERVER_URL || 'http://localhost:3000';
 // Pages
 export function wpPages() {
-  console.log
   return get(`${serverUrl}/api/pages`);
 }
 

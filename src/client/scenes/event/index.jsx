@@ -1,7 +1,7 @@
 /* globals process */
 
 import React from 'react';
-
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 // Components
@@ -51,15 +51,26 @@ class EventContainer extends React.Component {
   }
 
   render() {
+    const { event } = this.props;
+
     return (
       <div className="event">
         {this.renderHighlight()}
         <div className="event__event-container">
-          {this.props.event && (
+          {event && (
             <div className="event__description">
-              <p>{this.props.event.description}</p>
+              <Helmet>
+                <title>Dstudio - {event.title}</title>
+                <meta property="og:title" content={`Dstudio - ${event.title}`} />
+                <meta property="og:description" content={event.description} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${process.env.EXTERNAL_CMS_URL}${event.image.url}`} />
+                <meta property="og:image:alt" content={`Dstudio - ${event.title}`} />
+              </Helmet>
+
+              <p>{event.description}</p>
               <br />
-              <p>{stringToEventDate(this.props.event.date)}</p>
+              <p>{stringToEventDate(event.date)}</p>
               <br />
               <p>Av. Alda 464 Centro Diadema</p>
             </div>
