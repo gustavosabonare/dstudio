@@ -34,7 +34,8 @@ export default class PLayer extends Component {
     const { musics } = this.props;
 
     if (musics && musics.length > 0) {
-      this.audio.current.addEventListener('timeupdate', e => { console.log(e.target.currentTime); this.setState({ currentPlayTime: e.target.currentTime}) });
+      this.audio.current.addEventListener('canplay', () => this.state.isPlaying && this.audio.current.play());
+      this.audio.current.addEventListener('timeupdate', e => { this.setState({ currentPlayTime: e.target.currentTime}) });
       this.audio.current.addEventListener('ended', this.nextMusic);
       this.audio.current.addEventListener('play', () => this.setState({ isPlaying: true }));
       this.audio.current.addEventListener('pause', () => this.setState({ isPlaying: false }));
@@ -84,7 +85,7 @@ export default class PLayer extends Component {
   }
 
   prevMusic() {
-    if (this.state.currentPlayingIndex > 0)
+    if (this.state.currentPlayingIndex > 0) 
       this.setState({currentPlayingIndex: this.state.currentPlayingIndex - 1})
   }
 
@@ -124,7 +125,7 @@ export default class PLayer extends Component {
         <audio ref={this.audio} className="player__audio" src={currentMusic && `${process.env.EXTERNAL_CMS_URL}${currentMusic.media.url}`} />
         {this.state.isModalOpen && <div className="player__modal">
           <div className="player__banner">
-            <img src={currentMusic.image || 'http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png'} className="player__image" />
+            <img src={currentMusic.image || `${process.env.EXTERNAL_CMS_URL}/uploads/d1063e568dba4c29bb2a71f4578ba648.png`} className="player__image" />
           </div>
           <div className="player__progress">
             <span className="player__progress-time">{secondsToMinutes(currentPlayTime)}</span>

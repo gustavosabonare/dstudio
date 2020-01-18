@@ -1,3 +1,5 @@
+/* globals process */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -30,7 +32,7 @@ export default class Header extends Component {
     return (
       <header className={`header ${this.state.headerClass}`}>
         <Link to='/'>
-          <img className="header__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
+          <img className="header__logo" alt='logo' src={`${process.env.EXTERNAL_CMS_URL}/uploads/d1063e568dba4c29bb2a71f4578ba648.png`} />
         </Link>
         <Menu pages={this.props.pages} />
       </header>
