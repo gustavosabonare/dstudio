@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 // Components
 import Footer from './components/footer';
+import Tagging from './components/tagging';
 
 // Containers
 import HeaderContainer from './containers/header';
@@ -24,5 +25,7 @@ export default () => (
 
     <PlayerContainer />
     <Footer />
+
+    <Tagging />
   </Fragment>
 );
