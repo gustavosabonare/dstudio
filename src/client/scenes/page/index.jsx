@@ -22,7 +22,7 @@ class Page extends React.Component {
   }
 
   renderCarousels() {
-    if (this.props.page.carrousels) {
+    if (this.props.page.carrousels && this.props.page.carrousels.length > 0) {
       return (
         <div className="page__carousels-container">
           {this.props.page.carrousels.map(carrousel => (
@@ -34,7 +34,7 @@ class Page extends React.Component {
   }
 
   renderCards() {
-    if (this.props.page.cards) {
+    if (this.props.page.cards && this.props.page.cards.length > 0) {
       return (
         <div className="page__cards-container">
           {this.props.page.cards.map(card => (

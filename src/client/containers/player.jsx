@@ -19,9 +19,10 @@ class PlayerContainer extends React.Component {
   }
 
   render() {
-    return (
-      <Player musics={this.props.musics} />
-    )
+    if (this.props.musics)
+      return <Player musics={this.props.musics} />
+
+    return null;
   }
 }
 

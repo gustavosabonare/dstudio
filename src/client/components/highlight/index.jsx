@@ -11,7 +11,7 @@ export default ({ events, pageTitle, pageBackground }) => {
     return (
       <div className={`highlight highlight--banner`}>
         <div className="highlight__filter"></div>
-        <img className="highlight__image" src={pageBackground} />
+        <img className="highlight__image" src={pageBackground} alt={pageTitle} />
         <div className="highlight__shadow"></div>
         <div className="highlight__info">
           <h3 className="highlight__title">{pageTitle}</h3>
@@ -25,7 +25,7 @@ export default ({ events, pageTitle, pageBackground }) => {
   return (
     <div className={`highlight`}>
       <div className="highlight__filter"></div>
-      <img className="highlight__image" src={image.url} />
+      <img className="highlight__image" src={image.url} alt={title} />
       <div className="highlight__shadow"></div>
       <div className="highlight__info">
         <h3 className="highlight__title">{title}</h3>

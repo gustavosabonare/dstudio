@@ -39,14 +39,18 @@ class EventContainer extends React.Component {
   }
 
   renderVideoPlayer() {
-    return this.props.event && (
-      <VideoPlayer videos={[this.props.event.video]} />
+    return this.props.event && this.props.event.playlist && this.props.event.playlist.videos && (
+      <section className="event__video-container">
+        <VideoPlayer videos={this.props.event.playlist.videos} />
+      </section>
     );
   }
 
   renderEventImage() {
-    return this.props.event && (
-      <img src={this.props.event.image.url} />
+    return this.props.event && this.props.event.image && (
+      <section className="event__image-container">
+        <img src={this.props.event.image.url} alt={this.props.event.title} />
+      </section>
     );
   }
 
@@ -56,6 +60,7 @@ class EventContainer extends React.Component {
     return (
       <div className="event">
         {this.renderHighlight()}
+
         <div className="event__event-container">
           {event && (
             <div className="event__description">
@@ -76,13 +81,9 @@ class EventContainer extends React.Component {
             </div>
           )}
 
-          <section className="event__image-container">
-            {this.renderEventImage()}
-          </section>
+          {this.renderEventImage()}
 
-          <section className="event__video-container">
-            {this.renderVideoPlayer()}
-          </section>
+          {this.renderVideoPlayer()}
         </div>
       </div>
     )
