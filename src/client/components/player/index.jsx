@@ -122,10 +122,10 @@ export default class PLayer extends Component {
 
     return (
       <div className="player">
-        <audio ref={this.audio} className="player__audio" src={currentMusic && `${process.env.EXTERNAL_CMS_URL}${currentMusic.media.url}`} />
+        <audio ref={this.audio} className="player__audio" src={currentMusic && currentMusic.media.url} />
         {this.state.isModalOpen && <div className="player__modal">
           <div className="player__banner">
-            <img src={currentMusic.image || `${process.env.EXTERNAL_CMS_URL}/uploads/d1063e568dba4c29bb2a71f4578ba648.png`} className="player__image" />
+            <img src={currentMusic.image || `${process.env.STORAGE_URL}/logo.png`} className="player__image" />
           </div>
           <div className="player__progress">
             <span className="player__progress-time">{secondsToMinutes(currentPlayTime)}</span>

@@ -33,7 +33,7 @@ class EventContainer extends React.Component {
     return this.props.event && (
       <Highlight
         pageTitle={this.props.event.title}
-        pageBackground={this.props.event.image && `${process.env.EXTERNAL_CMS_URL}${this.props.event.image.url}`}
+        pageBackground={this.props.event.image && this.props.event.image.url}
       />
     )
   }
@@ -46,7 +46,7 @@ class EventContainer extends React.Component {
 
   renderEventImage() {
     return this.props.event && (
-      <img src={`${process.env.EXTERNAL_CMS_URL}${this.props.event.image.url}`} />
+      <img src={this.props.event.image.url} />
     );
   }
 
@@ -64,7 +64,7 @@ class EventContainer extends React.Component {
                 <meta property="og:title" content={`Dstudio - ${event.title}`} />
                 <meta property="og:description" content={event.description} />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content={`${process.env.EXTERNAL_CMS_URL}${event.image.url}`} />
+                <meta property="og:image" content={event.image.url} />
                 <meta property="og:image:alt" content={`Dstudio - ${event.title}`} />
               </Helmet>
 

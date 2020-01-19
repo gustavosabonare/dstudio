@@ -32,7 +32,7 @@ export default class Header extends Component {
     return (
       <header className={`header ${this.state.headerClass}`}>
         <Link to='/'>
-          <img className="header__logo" alt='logo' src={`${process.env.EXTERNAL_CMS_URL}/uploads/d1063e568dba4c29bb2a71f4578ba648.png`} />
+          <img className="header__logo" alt='logo' src={`${process.env.STORAGE_URL}/logo.png`} />
         </Link>
         <Menu pages={this.props.pages} />
       </header>

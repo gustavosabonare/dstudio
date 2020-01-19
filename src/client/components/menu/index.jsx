@@ -1,3 +1,5 @@
+/* globals process */
+
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
@@ -61,7 +63,7 @@ export default class Menu extends Component {
               <i className="fas fa-bars"></i>
             </div>
             <div className={menuContentClass}>
-              <img className="menu__logo" alt='logo' src="http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png" />
+              <img className="menu__logo" alt='logo' src={`${process.env.STORAGE_URL}/logo.png`} />
               {this.renderNav(this.onBarsClick.bind(this))}
               {this.renderSocial()}
             </div>

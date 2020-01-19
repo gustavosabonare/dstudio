@@ -65,7 +65,7 @@ class VideoPlayer extends React.Component {
 
       return (
         <li key={video.title} className={`videos__video ${classActive}`} onClick={() => this.onVideoSelect(index)}>
-          <img src={video.image || 'http://diademastudio.com.br/wp-content/uploads/2018/02/logo.png'} />
+          <img src={video.image || `${process.env.STORAGE_URL}/logo.png`} />
           <div className='videos__video-info'>
             <h3>{video.title}</h3>
             <p>{video.description}</p>

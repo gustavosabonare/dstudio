@@ -17,7 +17,7 @@ class Page extends React.Component {
     return <Highlight
       events={this.props.page.banner && this.props.page.banner.events}
       pageTitle={this.props.page.title}
-      pageBackground={this.props.page.background && `${process.env.EXTERNAL_CMS_URL}${this.props.page.background.url}`}
+      pageBackground={this.props.page.background && this.props.page.background.url}
     />
   }
 
@@ -68,7 +68,7 @@ class Page extends React.Component {
           <title>Dstudio - {page.title}</title>
           <meta property="og:title" content={`Dstudio - ${page.title}`} />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content={`${process.env.EXTERNAL_CMS_URL}/uploads/d1063e568dba4c29bb2a71f4578ba648.png`} />
+          <meta property="og:image" content={`${process.env.STORAGE_URL}/logo.png`} />
           <meta property="og:image:type" content="image/png" />
           <meta property="og:image:alt" content={`Dstudio - ${page.title}`} />
         </Helmet>
