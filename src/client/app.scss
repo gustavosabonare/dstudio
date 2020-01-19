@@ -17,13 +17,23 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: rgba(white, .5);
+  }
+}
+
 p {
   margin: 0;
 }
 
 #root {
-  position: absolute;
   width: 100%;
+  flex-direction: column;
+  display: flex;
   height: 100%;
   transition: right .3s ease;
   will-change: right;
