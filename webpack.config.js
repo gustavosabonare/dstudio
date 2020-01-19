@@ -71,9 +71,9 @@ const frontConfig = ({
   mode: process.env.NODE_ENV,
   entry: [
     'babel-polyfill',
-    'webpack-hot-middleware/client',
+    process.env.NODE_ENV === 'development' && 'webpack-hot-middleware/client',
     './src/client/index.js'
-  ],
+  ].filter(Boolean),
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -86,9 +86,9 @@ const frontConfig = ({
       'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    process.env.NODE_ENV === 'development' && new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-  ],
+  ].filter(Boolean),
 
   module: {
     rules: [{
