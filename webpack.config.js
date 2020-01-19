@@ -82,7 +82,7 @@ const frontConfig = ({
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.EXTERNAL_CMS_URL': JSON.stringify(process.env.EXTERNAL_CMS_URL),
+      'process.env.STORAGE_URL': JSON.stringify(process.env.STORAGE_URL),
       'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
