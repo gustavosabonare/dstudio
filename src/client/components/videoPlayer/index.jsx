@@ -13,7 +13,7 @@ class VideoPlayer extends React.Component {
     }
   }
 
-  initYoutube() {
+  initYoutube(newIndex) {
     if (YT.Player) {
       this.player = YT.Player && new YT.Player('ytplayer', {
         playerVars: {
@@ -25,7 +25,7 @@ class VideoPlayer extends React.Component {
         width: 'unset',
         events: {
           onStateChange: this.onPlayerStateChange,
-          onReady: () => this.onVideoSelect()
+          onReady: () => this.onVideoSelect(newIndex)
         },
       })
 
@@ -37,26 +37,20 @@ class VideoPlayer extends React.Component {
     this.initYoutube();
   }
 
-  componentDidUpdate() {
-    if (!this.state.playerAPI)
-      this.initYoutube();
-  }
-
   onPlayerStateChange(evt) {
     if (YT && evt.data === YT.PlayerState.PLAYING)
       document.querySelector('audio').pause()
   }
 
-  onVideoSelect(index) {
-    if (index && this.state.currentVideo !== index) {
-      this.setState({ currentVideo: index });
-      const currentVideo = this.props.videos[index];
+  onVideoSelect(index = 0) {
+    if (!this.player)
+      return this.initYoutube(index);
 
-      return this.player.cueVideoByUrl(currentVideo.link)
-    }
+    const newVideo = this.props.videos[index];
 
-    const currentVideo = this.props.videos[this.state.currentVideo];
-    this.player.cueVideoByUrl(currentVideo.link);
+    this.player.cueVideoByUrl(newVideo.link);
+
+    this.setState({ currentVideo: index });
   }
 
   renderCards() {

@@ -4,6 +4,10 @@
   width: 100%;
   display: flex;
 
+  @include for-notebook { 
+    flex-direction: column;
+  }
+
   iframe {
     flex: 1;
     @include for-tablet-landscape {
@@ -34,6 +38,12 @@
     &::-webkit-scrollbar-thumb { 
       background: #3b2144;
     }
+
+    @include for-notebook {
+      width: 100%;
+      max-height: 180px;
+    }
+
   }
 
   &__video {
@@ -55,7 +65,7 @@
     img {
       height: 90px;
       width: 90px;
-      object-fit: scale-down;
+      object-fit: cover;
     }
 
     &-info {
@@ -67,7 +77,7 @@
       }
     }
 
-    @include for-tablet-landscape {
+    @include for-notebook {
       height: 80px;
 
       img {
