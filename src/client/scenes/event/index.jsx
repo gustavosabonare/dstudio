@@ -75,9 +75,8 @@ class EventContainer extends React.Component {
 
               <p>{event.description}</p>
               <br />
-              <p>{stringToEventDate(event.date)}</p>
+              {event.date && <p>{stringToEventDate(event.date)}</p>}
               <br />
-              <p>Av. Alda 464 Centro Diadema</p>
             </div>
           )}
 
