@@ -8,6 +8,10 @@
   position: relative;
   width: 100%;
 
+  @include for-small-notebook {
+    height: 100vh;
+  }
+
   @include for-tablet-landscape {
     height: 50vh;
   }
