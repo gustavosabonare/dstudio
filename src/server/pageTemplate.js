@@ -1,4 +1,4 @@
-export default (html, helmet, preloadedState) => {
+export default (html, helmet, preloadedApolloState) => {
     return `<!DOCTYPE html>
     <html lang="en">
     
@@ -39,7 +39,7 @@ export default (html, helmet, preloadedState) => {
         </div>
 
         <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
+          window.__APOLLO_STATE__ = ${JSON.stringify(preloadedApolloState).replace(/</g, '\\u003c')};
         </script>
 
         <script type="text/javascript" src="/bundle.js"></script>

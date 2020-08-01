@@ -7,7 +7,7 @@ import Tagging from './components/tagging';
 
 // Containers
 import HeaderContainer from './containers/header';
-import PlayerContainer from './containers/player';
+import MusicPlayerContainer from './containers/musicPlayer';
 
 // Scenes
 import { Event, Page } from './scenes';
@@ -23,7 +23,7 @@ export default () => (
       <Route path='/:page?' component={Page} />
     </Switch>
 
-    <PlayerContainer />
+    <MusicPlayerContainer />
     <Footer />
 
     <Tagging />

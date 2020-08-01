@@ -11,7 +11,7 @@
   transition: all .2s linear;
   justify-content: space-between;
 
-  @include for-tablet-landscape {
+  @include for-small-notebook {
     height: 130px;
   }
   
@@ -26,7 +26,7 @@
     width: 250px;
     transition: all .2s linear;
 
-    @include for-tablet-landscape {
+    @include for-small-notebook {
       height: 45px;
       width: 125px;
     }

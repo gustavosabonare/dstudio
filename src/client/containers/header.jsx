@@ -1,37 +1,27 @@
 import React from 'react';
-
-import { connect } from 'react-redux';
+import { useQuery, gql } from '@apollo/client';
 
 // Components
 import Header from '../components/header';
 
-// Actions
-import { fetchPagesLogic } from '../redux/actions/pages';
+const HEADER_QUERY = gql`
+  query {
+    pages {
+      title,
+      id,
+      url,
+    }
+  }
+`;
 
-class HeaderContainer extends React.Component {
-  static fetchData() {
-    return fetchPagesLogic();
+const HeaderContainer = () => {
+  const { data } = useQuery(HEADER_QUERY);
+
+  if (data && data.pages) {
+    return <Header pages={data.pages} />
   }
 
-  componentWillMount() {
-    if (!this.props.isRequesting && this.props.pages.length === 0)
-      this.props.fetchPages();
-  }
-
-  render() {
-    return (
-      <Header pages={this.props.pages} />
-    )
-  }
+  return null;
 }
 
-const mapStateToProps = state => ({
-  isRequesting: state.pages.requesting,
-  pages: state.pages && state.pages.result,
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchPages: () => dispatch(fetchPagesLogic()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default HeaderContainer;

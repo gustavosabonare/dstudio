@@ -1,6 +1,6 @@
 /* globals process */
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
@@ -10,32 +10,30 @@ import './index.scss';
 
 const smallHeaderClass = 'header--small';
 
-export default class Header extends Component {
-  state = { headerClass: '' };
+const Header = ({ pages }) => {
+  const [headerClass, setHeaderClass] = useState('');
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.getWindowHeight.bind(this));
+  useEffect(() => {
+    window.addEventListener('scroll', getWindowHeight);
+
+    return () => window.removeEventListener('scroll', getWindowHeight);
+  }, [])
+
+  const getWindowHeight = () => {
+    if (document.documentElement.scrollTop > 50 && headerClass !== smallHeaderClass)
+      setHeaderClass(smallHeaderClass);
+    else if (document.documentElement.scrollTop === 0 && headerClass === smallHeaderClass)
+      setHeaderClass('');
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.getWindowHeight.bind(this));
-  }
-
-  getWindowHeight() {
-    if (document.documentElement.scrollTop > 50 && this.state.headerClass !== smallHeaderClass)
-      this.setState({ headerClass: smallHeaderClass });
-    else if (document.documentElement.scrollTop === 0 && this.state.headerClass === smallHeaderClass)
-      this.setState({ headerClass: '' });
-  }
-
-  render() {
-    return (
-      <header className={`header ${this.state.headerClass}`}>
-        <Link to='/'>
-          <img className="header__logo" alt='logo' src={`${process.env.STORAGE_URL}/logo.png`} />
-        </Link>
-        <Menu pages={this.props.pages} />
-      </header>
-    )
-  }
+  return (
+    <header className={`header ${headerClass}`}>
+      <Link to='/'>
+        <img className="header__logo" alt='logo' src={`${process.env.STORAGE_URL}/logo.png`} />
+      </Link>
+      <Menu pages={pages} />
+    </header>
+  )
 }
+
+export default Header;

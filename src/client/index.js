@@ -1,25 +1,19 @@
 import React from 'react';
-import thunk from 'redux-thunk';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
-import rootReducer from './redux/reducers';
+import { ApolloProvider } from '@apollo/client';
+
+import { client } from './services/graphql';
+
 import App from './app';
 
-
-const preloadedState = window.__PRELOADED_STATE__
-
-const store = createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(thunk)));
-
 render(
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider>,
+  </ApolloProvider>,
   document.getElementById('root')
 );
 

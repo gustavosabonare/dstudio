@@ -2,98 +2,105 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { connect } from 'react-redux';
+import { useQuery, gql } from '@apollo/client';
 
 // Components
-import Highlight from '../../components/highlight';
-import Carousel from '../../components/carousel';
 import Card from '../../components/card';
-import VideoPlayer from '../../components/videoPlayer';
+
+// Containers
+import Highlight from '../../containers/highlight';
+import Carousel from '../../containers/carousel';
+import Playlist from '../../containers/playlist';
 
 import './index.scss';
 
-class Page extends React.Component {
-  renderHighlight() {
-    return <Highlight
-      events={this.props.page.banner && this.props.page.banner.events}
-      pageTitle={this.props.page.title}
-      pageBackground={this.props.page.background && this.props.page.background.url}
-    />
-  }
-
-  renderCarousels() {
-    if (this.props.page.carrousels && this.props.page.carrousels.length > 0) {
-      return (
-        <div className="page__carousels-container">
-          {this.props.page.carrousels.map(carrousel => (
-            <Carousel key={carrousel.id} title={carrousel.title} events={carrousel.events} onClick={(id) => this.props.history.push(`details/${id}`)} />
-          ))}
-        </div>
-      )
+const PAGE_QUERY = gql`
+query {
+  pages {
+    id
+    title
+    url
+    playlist {
+      id
+    }
+    background {
+      name
+      url
+      id
+    }
+    cards {
+      id
+      description
+      image {
+        name
+        url
+        id
+      }
+    }
+    carrousels {
+      id
+    }
+    banner {
+      id
     }
   }
+}
+`;
 
-  renderCards() {
-    if (this.props.page.cards && this.props.page.cards.length > 0) {
+
+const Page = ({ match, history }) => {
+  const { data } = useQuery(PAGE_QUERY);
+
+  if (!data) {
+    return null;
+  }
+
+  const page = data.pages.filter(page => page.url === match.url)[0];
+
+  if (!page) {
+    return null;
+  }
+
+  const renderCards = () => {
+    if (page.cards && page.cards.length > 0) {
       return (
         <div className="page__cards-container">
-          {this.props.page.cards.map(card => (
+          {page.cards.map(card => (
             <Card key={card.id} {...card} />
           ))}
-        </div>
-      )
-    }
-  }
-
-  renderVideoPlayer() {
-    if (this.props.page.playlist && this.props.page.playlist.player === 'Youtube') {
-      return (
-        <div className="page__video-container">
-          <VideoPlayer videos={this.props.page.playlist.videos} />
         </div>
       );
     }
   }
 
-  render() {
-    const { page } = this.props;
+  return (
+    <div className="page">
+      <Helmet>
+        <title>Dstudio - {page.title}</title>
+        <meta property="og:title" content={`Dstudio - ${page.title}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${process.env.STORAGE_URL}/logo.png`} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:alt" content={`Dstudio - ${page.title}`} />
+      </Helmet>
 
-    if (!page) {
-      return null;
-    }
+      <Highlight title={page.title} background={page.background && page.background.url} id={page.banner && page.banner.id} />
 
-    return (
-      <div className="page">
-        <Helmet>
-          <title>Dstudio - {page.title}</title>
-          <meta property="og:title" content={`Dstudio - ${page.title}`} />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content={`${process.env.STORAGE_URL}/logo.png`} />
-          <meta property="og:image:type" content="image/png" />
-          <meta property="og:image:alt" content={`Dstudio - ${page.title}`} />
-        </Helmet>
+      <main>
+        {page.playlist && <div className="page__video-container">
+          <Playlist id={page.playlist.id} />
+        </div>}
 
-        {this.renderHighlight()}
+        {page.carrousels && page.carrousels.length > 0 && <div className="page__carousels-container">
+          {page.carrousels.map(carrousel => (
+            <Carousel key={carrousel.id} id={carrousel.id} onCardClick={id => history.push(`details/${id}`)} />
+          ))}
+        </div>}
 
-        <main>
-          {this.renderVideoPlayer()}
-          {this.renderCarousels()}
-          {this.renderCards()}
-        </main>
-      </div >
-    )
-  }
+        {renderCards()}
+      </main>
+    </div >
+  );
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const currentPage = state.pages.result.filter(page => page.url === ownProps.match.url)[0];
-
-  return ({
-    pageLoading: state.pages.requesting,
-    page: currentPage,
-  })
-}
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Page);
+export default Page;

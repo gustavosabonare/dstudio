@@ -1,19 +1,22 @@
 /* globals process */
 
-import React, { Component } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
+
+import useOnClickOutside from '../../hooks/onClickOutside';
 
 // Styles
 import './index.scss';
 
-export default class Menu extends Component {
-  state = {
-    isOpen: false,
-  }
+const Menu = ({ pages }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menu = useRef();
 
-  onBarsClick() {
-    const newIsOpen = !this.state.isOpen
+  useOnClickOutside(menu, () => setIsOpen(false));
+
+  const onBarsClick = () => {
+    const newIsOpen = !isOpen
     const rootEl = document.getElementById('root');
 
     if (newIsOpen)
@@ -21,12 +24,10 @@ export default class Menu extends Component {
     else
       rootEl.style.right = '0';
 
-    this.setState({ isOpen: !this.state.isOpen });
+    setIsOpen(!isOpen);
   }
 
-  renderNav(linkCb) {
-    const { pages } = this.props;
-
+  const renderNav = (linkCb) => {
     return (
       <nav className="menu__nav">
         {pages.map(page => (
@@ -36,7 +37,7 @@ export default class Menu extends Component {
     )
   }
 
-  renderSocial() {
+  const renderSocial = () => {
     return (
       <div className="menu__social">
         <a href='https://www.instagram.com/dstudiomusic/' target="_blank">
@@ -52,30 +53,31 @@ export default class Menu extends Component {
     )
   }
 
-  render() {
-    const menuContentClass = this.state.isOpen ? 'menu__content menu__content--open' : 'menu__content';
+  const menuContentClass = isOpen ? 'menu__content menu__content--open' : 'menu__content';
 
-    return (
-      <div>
-        <MediaQuery maxDeviceWidth={900}>
-          <div className="menu menu--responsive">
-            <div className="menu__bars" onClick={this.onBarsClick.bind(this)}>
-              <i className="fas fa-bars"></i>
-            </div>
-            <div className={menuContentClass}>
-              <img className="menu__logo" alt='logo' src={`${process.env.STORAGE_URL}/logo.png`} />
-              {this.renderNav(this.onBarsClick.bind(this))}
-              {this.renderSocial()}
-            </div>
+  return (
+    <div ref={menu}>
+      <MediaQuery maxDeviceWidth={900}>
+        <div className="menu menu--responsive">
+          <div className="menu__bars" onClick={onBarsClick}>
+            <i className="fas fa-bars"></i>
           </div>
-        </MediaQuery>
-        <MediaQuery minDeviceWidth={901}>
-          <div className="menu">
-            {this.renderNav()}
-            {this.renderSocial()}
+          <div className={menuContentClass}>
+            <img className="menu__logo" alt='logo' src={`${process.env.STORAGE_URL}/logo.png`} />
+            {renderNav(onBarsClick)}
+            {renderSocial()}
           </div>
-        </MediaQuery>
-      </div>
-    );
-  }
+        </div>
+      </MediaQuery>
+      <MediaQuery minDeviceWidth={901}>
+        <div className="menu">
+          {renderNav()}
+          {renderSocial()}
+        </div>
+      </MediaQuery>
+    </div>
+  );
 }
+
+export default Menu;
+

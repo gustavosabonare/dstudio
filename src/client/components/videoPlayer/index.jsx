@@ -1,3 +1,5 @@
+/* globals process */
+
 import React from 'react';
 
 // Styles
