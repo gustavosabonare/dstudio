@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { truncate } from '../../helpers/string';
+
 // Styles
 import './index.scss';
 
@@ -64,7 +66,7 @@ class VideoPlayer extends React.Component {
           <img src={video.image && video.image.url || `${process.env.STORAGE_URL}/logo.png`} alt='logo' />
           <div className='videos__video-info'>
             <h3>{video.title}</h3>
-            <p>{video.description}</p>
+            <p>{truncate(video.description, 65)}</p>
           </div>
         </li>
       )

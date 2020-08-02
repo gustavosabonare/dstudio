@@ -73,7 +73,12 @@
     @include for-big-notebook-up {
       bottom: 20%;
     }
+
     @include for-notebook {
+      bottom: 5%;
+    }
+
+    @include for-phone-only {
       bottom: 15%;
     }
   }
