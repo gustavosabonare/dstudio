@@ -6,6 +6,7 @@ import Carousel from '../components/carousel';
 const PLAYLIST_QUERY = gql`
   query($carrouselId: ID!) {
     carrousel(id: $carrouselId) {
+      title
       events {
         id
         title
