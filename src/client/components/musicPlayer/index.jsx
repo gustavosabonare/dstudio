@@ -23,7 +23,6 @@ const MusicPlayer = ({ musics }) => {
 
   useEffect(() => {
     if (musics && musics.length > 0) {
-        audio.current.addEventListener('canplay', () => isPlaying && audio.current.play());
         audio.current.addEventListener('timeupdate', e => setCurrentPlayTime(e.target.currentTime));
         audio.current.addEventListener('ended', nextMusic);
         audio.current.addEventListener('play', () => setIsPlaying(true));
@@ -35,6 +34,10 @@ const MusicPlayer = ({ musics }) => {
     if(isModalOpen)
       progressBar.current.addEventListener('click', seek);
   }, [isModalOpen]);
+
+  useEffect(() => {
+    audio.current.play();
+  }, [currentPlayingIndex]);
 
   const seek = (event) => {
     const percent = event.offsetX / event.currentTarget.offsetWidth;
@@ -63,13 +66,15 @@ const MusicPlayer = ({ musics }) => {
   }
 
   const nextMusic = () => {
-    if (currentPlayingIndex + 1 < musics.length)
+    if (currentPlayingIndex + 1 < musics.length) {
       setCurrentPlayingIndex(currentPlayingIndex + 1);
+    }
   }
 
   const prevMusic = () => {
-    if (currentPlayingIndex > 0) 
+    if (currentPlayingIndex > 0) {
       setCurrentPlayingIndex(currentPlayingIndex - 1);
+    }
   }
 
   const renderMusic = () => {
