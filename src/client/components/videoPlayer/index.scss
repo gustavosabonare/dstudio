@@ -97,6 +97,7 @@
       &-info {
         color: white;
         margin-left: 10px;
+        width: 85%;
   
         h3 {
           margin: 0;
@@ -104,6 +105,9 @@
         }
 
         p {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
           font-size: 12px;
         }
       }
