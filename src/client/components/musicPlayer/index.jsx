@@ -99,7 +99,7 @@ const MusicPlayer = ({ musics }) => {
 
   return (
     <div className="player" ref={player}>
-      <audio ref={audio} className="player__audio" src={currentMusic && `${process.env.STORAGE_URL}${currentMusic.media.url}`} />
+      <audio ref={audio} className="player__audio" src={currentMusic && currentMusic.media.url} />
       {isModalOpen && <div className="player__modal">
         <div className="player__banner">
           <img src={currentMusic.image && currentMusic.image.url || `${process.env.STORAGE_URL}/logo.png`} className="player__image" alt='logo' />

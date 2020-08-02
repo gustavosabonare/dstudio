@@ -84,7 +84,7 @@ const frontConfig = ({
     new webpack.DefinePlugin({
       'process.env.STORAGE_URL': JSON.stringify(process.env.STORAGE_URL),
       'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
-      'process.env.CMS_URL': JSON.stringify(process.env.CMS_URL),
+      'process.env.EXTERNAL_CMS_URL': JSON.stringify(process.env.EXTERNAL_CMS_URL),
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     process.env.NODE_ENV === 'development' && new webpack.HotModuleReplacementPlugin(),

@@ -2,7 +2,7 @@
 
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const serverUrl = process.env.CMS_URL || 'http://localhost:3000';
+const serverUrl = process.env.EXTERNAL_CMS_URL || 'http://localhost:3000';
 
 export const client = new ApolloClient({
   uri: serverUrl + '/graphql',
